@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "hadis",
+    "title": "Hadis Dersleri",
+    "description": "Hadis metinleri, şerhler ve usul çalışmaları.",
+    "status": "coming-soon"
+  },
+  {
+    "slug": "fikih",
+    "title": "Fıkıh Dersleri",
+    "description": "Fıkıh usulü ve güncel fıkhi meseleler.",
+    "status": "coming-soon"
+  },
+  {
+    "slug": "tefsir",
+    "title": "Tefsir Dersleri",
+    "description": "Kur'an-ı Kerim tefsiri ve meali üzerine okumalar.",
+    "status": "coming-soon"
+  },
+  {
+    "slug": "genel-islami",
+    "title": "Genel İslami Dersler",
+    "description": "Akaid, Kelam, Siyer ve İslam Tarihi.",
+    "status": "coming-soon"
+  },
+  {
+    "slug": "dil",
+    "title": "Dil Dersleri",
+    "description": "Arapça gramer (Nahiv/Sarf), kelime çalışmaları ve çeviri.",
+    "status": "coming-soon"
+  }
+]
