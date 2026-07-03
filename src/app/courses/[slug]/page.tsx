@@ -5,6 +5,7 @@ import StatusBadge from "@/components/ui/StatusBadge";
 import ModuleCard from "@/components/course/ModuleCard";
 import { courses, getCourseBySlug } from "@/data/courses";
 import { departmentTitleAr, getDepartmentById } from "@/data/departments";
+import { getMindMap } from "@/lib/content";
 
 interface CoursePageProps {
   params: Promise<{ slug: string }>;
@@ -12,26 +13,30 @@ interface CoursePageProps {
 
 const STUDY_MODULES = [
   {
+    id: "summaries",
     icon: "📝",
     title: "Ders Özetleri",
     description: "Haftalık okuma notları ve konu metinlerinin özetleri.",
   },
   {
+    id: "mindmap",
     icon: "🧠",
     title: "Zihin Şemaları",
     description: "Kavramları ve ilişkileri gösteren görsel şemalar.",
   },
   {
+    id: "keywords",
     icon: "🔤",
     title: "Anahtar Kelimeler",
     description: "İnteraktif Arapça-Türkçe kavram ve terim kartları.",
   },
   {
+    id: "materials",
     icon: "📚",
     title: "Ders Materyalleri",
     description: "PDF dökümanlar ve harici akademik kaynaklar.",
   },
-];
+] as const;
 
 const DEFAULT_DESCRIPTION =
   "Bu ders çalışma alanında ders özetleri, zihin şemaları, anahtar kavramlar ve materyaller zamanla eklenecektir.";
@@ -63,6 +68,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
   const isShared = course.departments.length > 1;
   const hasContent = course.status === "ready";
+  const hasMindMap = Boolean(getMindMap(course.contentSlug));
   const firstDepartment = getDepartmentById(course.departments[0]);
 
   return (
@@ -124,15 +130,19 @@ export default async function CoursePage({ params }: CoursePageProps) {
       {/* Çalışma modülleri: 2x2 kart düzeni */}
       <section className="mx-auto max-w-5xl px-[5%] py-14">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {STUDY_MODULES.map((module) => (
-            <ModuleCard
-              key={module.title}
-              icon={module.icon}
-              title={module.title}
-              description={module.description}
-              available={hasContent}
-            />
-          ))}
+          {STUDY_MODULES.map((module) => {
+            const isMindMap = module.id === "mindmap";
+            return (
+              <ModuleCard
+                key={module.id}
+                icon={module.icon}
+                title={module.title}
+                description={module.description}
+                available={isMindMap ? hasMindMap : hasContent}
+                href={isMindMap ? `/courses/${course.slug}/mindmaps` : undefined}
+              />
+            );
+          })}
         </div>
       </section>
     </>

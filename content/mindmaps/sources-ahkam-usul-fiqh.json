@@ -1,0 +1,42 @@
+{
+  "contentSlug": "sources-ahkam-usul-fiqh",
+  "titleAr": "مصادر الأحكام في أصول الفقه",
+  "titleTr": "Fıkıh Usûlünde Ahkâmın Kaynakları",
+  "root": {
+    "id": "root",
+    "titleAr": "مصادر الأحكام",
+    "titleTr": "Ahkâmın Kaynakları",
+    "children": [
+      {
+        "id": "quran",
+        "titleAr": "القرآن الكريم",
+        "titleTr": "Kur'ân-ı Kerîm",
+        "children": []
+      },
+      {
+        "id": "sunnah",
+        "titleAr": "السنة النبوية",
+        "titleTr": "Sünnet-i Nebeviyye",
+        "children": []
+      },
+      {
+        "id": "ijma",
+        "titleAr": "الإجماع",
+        "titleTr": "İcmâ",
+        "children": []
+      },
+      {
+        "id": "qiyas",
+        "titleAr": "القياس",
+        "titleTr": "Kıyas",
+        "children": []
+      },
+      {
+        "id": "disputed-evidence",
+        "titleAr": "الأدلة المختلف فيها",
+        "titleTr": "İhtilaflı Deliller",
+        "children": []
+      }
+    ]
+  }
+}

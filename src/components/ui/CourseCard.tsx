@@ -9,10 +9,6 @@ export default function CourseCard({ course }: { course: Course }) {
   const domain = DOMAIN_META[course.domain];
   const DomainIcon = DOMAIN_ICONS[course.domain];
 
-  // #region agent log
-  void fetch('http://127.0.0.1:7352/ingest/3c34793a-6080-4c09-b4f5-c17bc4dbf25b',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'e3b22a'},body:JSON.stringify({sessionId:'e3b22a',runId:'initial',hypothesisId:'H1,H2,H4',location:'src/components/ui/CourseCard.tsx:14',message:'course card render inputs',data:{courseId:course.id,slug:course.slug,domainId:course.domain,departments:course.departments,status:course.status,hasDomain:Boolean(domain),hasIcon:Boolean(DomainIcon),domainKeys:domain?Object.keys(domain):[]},timestamp:Date.now()})}).catch(()=>{});
-  // #endregion
-
   return (
     <Link href={`/courses/${course.slug}`} className="group block h-full">
       <article

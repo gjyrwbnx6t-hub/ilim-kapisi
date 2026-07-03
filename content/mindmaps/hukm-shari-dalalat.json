@@ -1,0 +1,349 @@
+{
+  "contentSlug": "hukm-shari-dalalat",
+  "titleAr": "الحكم الشرعي والدلالات",
+  "titleTr": "Hüküm Şer'î ve Delâletler",
+  "root": {
+    "id": "root",
+    "titleAr": "الحكم الشرعي والدلالات",
+    "titleTr": "Hüküm Şer'î ve Delâletler",
+    "children": [
+      {
+        "id": "week-1",
+        "titleAr": "الأسبوع 1",
+        "titleTr": "1. Hafta",
+        "children": [
+          {
+            "id": "w1-definition-and-types",
+            "titleAr": "تعريف الحكم الشرعي وأقسامه",
+            "children": [
+              {
+                "id": "w1-def-scholars-definition",
+                "titleAr": "تعريف الحكم الشرعي عند الأصوليين",
+                "children": [
+                  {
+                    "id": "w1-def-terminological-text",
+                    "titleAr": "النص الاصطلاحي للحكم",
+                    "children": [
+                      { "id": "w1-def-terminological-text-quote", "titleAr": "هو: \"خطاب الله المتعلق بأفعال المكلفين بالاقتضاء، أو التخيير، أو الوضع\"", "children": [] }
+                    ]
+                  },
+                  {
+                    "id": "w1-def-elements-explanation",
+                    "titleAr": "شرح عناصر ومحترزات التعريف",
+                    "children": [
+                      {
+                        "id": "w1-def-khitab-allah",
+                        "titleAr": "خطاب الله",
+                        "children": [
+                          { "id": "w1-def-khitab-direct-speech", "titleAr": "يشمل كلامه مباشرة (وهو القرآن الكريم)", "children": [] },
+                          { "id": "w1-def-khitab-indirect-speech", "titleAr": "يشمل كلامه بالواسطة (السنة النبوية، الإجماع، وسائر الأدلة الشرعية الكاشفة)", "children": [] },
+                          { "id": "w1-def-khitab-excl-dhat-sifat", "titleAr": "يخرج منه: الخطاب المتعلق بذاته وصفاته (مثل: \"الله بكل شيء عليم\")", "children": [] },
+                          { "id": "w1-def-khitab-excl-jamadat", "titleAr": "يخرج منه: الخطاب المتعلق بالجمادات والمخلوقات (مثل: \"والجبال أوتاداً\")", "children": [] },
+                          { "id": "w1-def-khitab-excl-qasas", "titleAr": "يخرج منه: القصص والإخبار دون طلب أو تخيير (مثل: \"غلبت الروم\")", "children": [] }
+                        ]
+                      },
+                      {
+                        "id": "w1-def-related-to-mukallaf-acts",
+                        "titleAr": "المتعلق بأفعال المكلفين",
+                        "children": [
+                          { "id": "w1-def-excl-non-ibad-acts", "titleAr": "يخرج منه: الخطاب المتعلق بغير أفعال العباد", "children": [] },
+                          { "id": "w1-def-mukallaf-definition", "titleAr": "المكلف: هو البالغ العاقل (المحكوم عليه)", "children": [] }
+                        ]
+                      },
+                      {
+                        "id": "w1-def-bil-iqtida",
+                        "titleAr": "بالاقتضاء",
+                        "children": [
+                          { "id": "w1-def-iqtida-meaning", "titleAr": "معناه: الطلب (سواء أكان طلب فعل أو طلب كف وترِك)", "children": [] },
+                          { "id": "w1-def-iqtida-fil-request", "titleAr": "يشمل: طلب الفعل على وجه الإلزام (الوجوب) أو الترجيح (الندب)", "children": [] },
+                          { "id": "w1-def-iqtida-kaff-request", "titleAr": "يشمل: طلب الكف على وجه الإلزام (التحريم) أو الترجيح (الكراهة)", "children": [] }
+                        ]
+                      },
+                      {
+                        "id": "w1-def-aw-takhyir",
+                        "titleAr": "أو التخيير",
+                        "children": [
+                          { "id": "w1-def-takhyir-meaning", "titleAr": "معناه: التسوية بين فعل الشيء وتركه دون ترجيح (وهو الإباحة)", "children": [] }
+                        ]
+                      },
+                      {
+                        "id": "w1-def-aw-wad",
+                        "titleAr": "أو الوضع",
+                        "children": [
+                          { "id": "w1-def-wad-meaning", "titleAr": "معناه: جعل الشارع للشيء سبباً لآخر، أو شرطاً له، أو مانعاً منه", "children": [] }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "w1-def-usuliyyun-fuqaha-dispute",
+                    "titleAr": "ثمرة الخلاف بين الأصوليين والفقهاء في ماهية الحكم",
+                    "children": [
+                      { "id": "w1-def-dispute-usuliyyun-view", "titleAr": "عند الأصوليين: الحكم هو نفس \"خطاب الله\" (أي النصوص الشرعية ذاتها)", "children": [] },
+                      { "id": "w1-def-dispute-fuqaha-view", "titleAr": "عند الفقهاء: الحكم هو \"أثر الخطاب\" وما يتضمنه (مثل: وصف الفعل بالحرمة أو الوجوب)", "children": [] }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "w1-def-original-types",
+                "titleAr": "أقسام الحكم الشرعي الأصلية",
+                "children": [
+                  {
+                    "id": "w1-def-taklifi-branch",
+                    "titleAr": "الحكم التكليفي",
+                    "children": [
+                      { "id": "w1-def-taklifi-definition", "titleAr": "تعريفه: هو ما يقتضي طلب الفعل، أو الكف عنه، أو التخيير بين الفعل والترك", "children": [] },
+                      { "id": "w1-def-taklifi-naming-reason", "titleAr": "سبب التسمية: سُمي تكليفياً لما فيه من الكلفة والمشقة على الإنسان (وجُعل المباح معه تغليباً)", "children": [] }
+                    ]
+                  },
+                  {
+                    "id": "w1-def-wadii-branch",
+                    "titleAr": "الحكم الوضعي",
+                    "children": [
+                      { "id": "w1-def-wadii-definition", "titleAr": "تعريفه: هو ما يقتضي جعل شيء سبباً لشيء آخر، أو شرطاً، أو مانعاً منه", "children": [] },
+                      { "id": "w1-def-wadii-naming-reason", "titleAr": "سبب التسمية: لأن الارتباط بين الشيئين جاء بوضع من الشارع وجعل منه", "children": [] }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "w1-taklifi-wadii-comparison",
+            "titleAr": "مقارنة بين الحكم التكليفي والحكم الوضعي",
+            "children": [
+              {
+                "id": "w1-cmp-main",
+                "titleAr": "مقارنة بين الحكم التكليفي والحكم الوضعي",
+                "children": [
+                  {
+                    "id": "w1-cmp-content-purpose",
+                    "titleAr": "من حيث المضمون والغاية والهدف",
+                    "children": [
+                      { "id": "w1-cmp-content-taklifi", "titleAr": "الحكم التكليفي: يتطلب من المكلف إيجاد فعل، أو تركه، أو يخيره بين الفعل والترك", "children": [] },
+                      { "id": "w1-cmp-content-wadii", "titleAr": "الحكم الوضعي: لا يتطلب فعلاً أو تركاً، بل يبين العلامات والروابط ليعرف المكلف متى يثبت الحكم ومتى ينتفي", "children": [] }
+                    ]
+                  },
+                  {
+                    "id": "w1-cmp-capability",
+                    "titleAr": "من حيث قدرة المكلف واستطاعته (المحكوم فيه)",
+                    "children": [
+                      {
+                        "id": "w1-cmp-capability-taklifi",
+                        "titleAr": "الحكم التكليفي: يشترط أن يكون المكلف به أمراً داخل حدود قدرة المكلف واستطاعته",
+                        "children": [
+                          { "id": "w1-cmp-capability-taklifi-rule", "titleAr": "القاعدة الأصولية الكلية: \"لا تكليف إلا بمقدور\"", "children": [] }
+                        ]
+                      },
+                      {
+                        "id": "w1-cmp-capability-wadii",
+                        "titleAr": "الحكم الوضعي: لا يشترط في موضوعه أن يكون في قدرة المكلف واستطاعته",
+                        "children": [
+                          {
+                            "id": "w1-cmp-capability-wadii-within-power",
+                            "titleAr": "أمور مقدورة للمكلف (وجُعلت أسباباً أو شروطاً وموانع)",
+                            "children": [
+                              { "id": "w1-cmp-within-power-crimes", "titleAr": "الجرائم: كالسرقة (سبب لقطع اليد)، والزنى (سبب للجلد أو الرجم)", "children": [] },
+                              { "id": "w1-cmp-within-power-contracts", "titleAr": "العقود والتصرفات: كالبيع (سبب لنقل الملكية)، والنكاح (سبب للحل والنفقة)", "children": [] },
+                              { "id": "w1-cmp-within-power-conditions", "titleAr": "الشروط المقذورة: كالوضوء (شرط لصحة الصلاة)، وحضور الشاهدين (شرط للنكاح)", "children": [] },
+                              { "id": "w1-cmp-within-power-obstacles", "titleAr": "الموانع المقدورة: كقتل الوارث لمورثه (مانع من الإرث)", "children": [] }
+                            ]
+                          },
+                          {
+                            "id": "w1-cmp-capability-wadii-outside-power",
+                            "titleAr": "أمور خارجة عن قدرة المكلف (ومع ذلك ترتب عليها أثرها بوضع الشارع)",
+                            "children": [
+                              { "id": "w1-cmp-outside-power-causes", "titleAr": "الأسباب: كحلول شهر رمضان (سبب لوجوب الصوم)، ودلوك الشمس (سبب لوجوب الصلاة)، والقرابة (سبب للميراث)", "children": [] },
+                              { "id": "w1-cmp-outside-power-conditions", "titleAr": "الشروط: كبلوغ الحلم لانتهاء الولاية، وبلوغ الرشد لنفاذ التصرفات المالية", "children": [] },
+                              { "id": "w1-cmp-outside-power-obstacles", "titleAr": "الموانع: كالجنون (مانع من التكليف والعقود)، والأبوة (مانعة من القصاص عند الجمهور إذا قتل ابنه)", "children": [] }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "week-2",
+        "titleAr": "الأسبوع 2",
+        "titleTr": "2. Hafta",
+        "children": [
+          { "id": "w2-taklifi-types", "titleAr": "أقسام الحكم التكليفي", "children": [] },
+          { "id": "w2-ijab-wajib", "titleAr": "الإيجاب / الواجب", "children": [] },
+          { "id": "w2-nadb-mandub", "titleAr": "الندب / المندوب", "children": [] },
+          { "id": "w2-tahrim-haram", "titleAr": "التحريم / الحرام", "children": [] },
+          { "id": "w2-karahah-makruh", "titleAr": "الكراهة / المكروه", "children": [] },
+          { "id": "w2-ibahah-mubah", "titleAr": "الإباحة / المباح", "children": [] }
+        ]
+      },
+      {
+        "id": "week-3",
+        "titleAr": "الأسبوع 3",
+        "titleTr": "3. Hafta",
+        "children": [
+          { "id": "w3-wadii-types", "titleAr": "أقسام الحكم الوضعي", "children": [] },
+          { "id": "w3-sabab", "titleAr": "السبب", "children": [] },
+          { "id": "w3-shart", "titleAr": "الشرط", "children": [] },
+          { "id": "w3-mani", "titleAr": "المانع", "children": [] }
+        ]
+      },
+      {
+        "id": "week-4",
+        "titleAr": "الأسبوع 4",
+        "titleTr": "4. Hafta",
+        "children": [
+          { "id": "w4-completion-wadii-taklifi", "titleAr": "استكمال أقسام الحكم الوضعي والتكليفي", "children": [] },
+          { "id": "w4-sihhah", "titleAr": "الصحة", "children": [] },
+          { "id": "w4-fasad-butlan", "titleAr": "الفساد والبطلان", "children": [] },
+          { "id": "w4-azimah", "titleAr": "العزيمة", "children": [] },
+          { "id": "w4-rukhsah", "titleAr": "الرخصة", "children": [] }
+        ]
+      },
+      {
+        "id": "week-5",
+        "titleAr": "الأسبوع 5",
+        "titleTr": "5. Hafta",
+        "children": [
+          { "id": "w5-hakim-source", "titleAr": "الحاكم / مصدر الحكم", "children": [] },
+          { "id": "w5-mahkum-fih", "titleAr": "المحكوم فيه / فعل المكلف", "children": [] },
+          { "id": "w5-mahkum-alayh", "titleAr": "المحكوم عليه / المكلف", "children": [] },
+          { "id": "w5-ahliyyah", "titleAr": "الأهلية", "children": [] }
+        ]
+      },
+      {
+        "id": "week-6",
+        "titleAr": "الأسبوع 6",
+        "titleTr": "6. Hafta",
+        "children": [
+          { "id": "w6-lafz-khass", "titleAr": "اللفظ الخاص", "children": [] },
+          { "id": "w6-khass-definition", "titleAr": "تعريف الخاص", "children": [] },
+          { "id": "w6-khass-forms", "titleAr": "صور اللفظ الخاص", "children": [] },
+          { "id": "w6-khass-ruling", "titleAr": "حكم اللفظ الخاص", "children": [] },
+          { "id": "w6-khass-usuli-types", "titleAr": "الأنواع الأصولية الداخلة تحت الخاص", "children": [] }
+        ]
+      },
+      {
+        "id": "week-7",
+        "titleAr": "الأسبوع 7",
+        "titleTr": "7. Hafta",
+        "children": [
+          { "id": "w7-khass-istinbat-types", "titleAr": "أقسام اللفظ الخاص في استنباط الأحكام", "children": [] },
+          { "id": "w7-amr", "titleAr": "الأمر", "children": [] },
+          { "id": "w7-nahy", "titleAr": "النهي", "children": [] },
+          { "id": "w7-mutlaq-muqayyad", "titleAr": "المطلق والمقيد", "children": [] }
+        ]
+      },
+      {
+        "id": "week-8",
+        "titleAr": "الأسبوع 8",
+        "titleTr": "8. Hafta",
+        "children": [
+          { "id": "w8-lafz-aam", "titleAr": "اللفظ العام", "children": [] },
+          { "id": "w8-aam-definition", "titleAr": "تعريف العام", "children": [] },
+          { "id": "w8-aam-forms", "titleAr": "صيغ وألفاظ العموم", "children": [] },
+          { "id": "w8-aam-tools", "titleAr": "أدوات العموم في النصوص الشرعية", "children": [] }
+        ]
+      },
+      {
+        "id": "week-9",
+        "titleAr": "الأسبوع 9",
+        "titleTr": "9. Hafta",
+        "children": [
+          { "id": "w9-takhsis-aam", "titleAr": "تخصيص العام", "children": [] },
+          { "id": "w9-aam-hujjiyyah-after-takhsis", "titleAr": "حجية العام بعد التخصيص", "children": [] },
+          { "id": "w9-takhsis-vs-naskh", "titleAr": "الفرق بين التخصيص والنسخ", "children": [] },
+          { "id": "w9-muttasil-mukhassisat", "titleAr": "المخصصات المتصلة", "children": [] },
+          { "id": "w9-munfasil-mukhassisat", "titleAr": "المخصصات المنفصلة", "children": [] },
+          { "id": "w9-qati-takhsis-by-zanni", "titleAr": "تخصيص العام القطعي بالدليل الظني", "children": [] }
+        ]
+      },
+      {
+        "id": "week-10",
+        "titleAr": "الأسبوع 10",
+        "titleTr": "10. Hafta",
+        "children": [
+          { "id": "w10-lafz-mushtarak", "titleAr": "اللفظ المشترك", "children": [] },
+          { "id": "w10-mushtarak-causes", "titleAr": "أسباب الاشتراك", "children": [] },
+          { "id": "w10-mushtarak-ruling", "titleAr": "حكم المشترك", "children": [] },
+          { "id": "w10-usage-types", "titleAr": "أقسام اللفظ من حيث الاستعمال", "children": [] },
+          { "id": "w10-haqiqah", "titleAr": "الحقيقة", "children": [] },
+          { "id": "w10-majaz", "titleAr": "المجاز", "children": [] },
+          { "id": "w10-sarih", "titleAr": "الصريح", "children": [] },
+          { "id": "w10-kinayah", "titleAr": "الكناية", "children": [] }
+        ]
+      },
+      {
+        "id": "week-11",
+        "titleAr": "الأسبوع 11",
+        "titleTr": "11. Hafta",
+        "children": [
+          { "id": "w11-clarity-types", "titleAr": "أقسام اللفظ من حيث الوضوح", "children": [] },
+          { "id": "w11-clear-dalalah-hanafi", "titleAr": "واضح الدلالة عند الحنفية", "children": [] },
+          { "id": "w11-zahir", "titleAr": "الظاهر", "children": [] },
+          { "id": "w11-nass", "titleAr": "النص", "children": [] },
+          { "id": "w11-mufassar", "titleAr": "المفسر", "children": [] },
+          { "id": "w11-muhkam", "titleAr": "المحكم", "children": [] }
+        ]
+      },
+      {
+        "id": "week-12",
+        "titleAr": "الأسبوع 12",
+        "titleTr": "12. Hafta",
+        "children": [
+          { "id": "w12-vagueness-types", "titleAr": "أقسام اللفظ من حيث الخفاء", "children": [] },
+          { "id": "w12-unclear-dalalah", "titleAr": "غير واضح الدلالة", "children": [] },
+          { "id": "w12-khafi", "titleAr": "الخفي", "children": [] },
+          { "id": "w12-mushkil", "titleAr": "المشكل", "children": [] }
+        ]
+      },
+      {
+        "id": "week-13",
+        "titleAr": "الأسبوع 13",
+        "titleTr": "13. Hafta",
+        "children": [
+          { "id": "w13-completion-vagueness-types", "titleAr": "استكمال أقسام اللفظ من حيث الخفاء", "children": [] },
+          { "id": "w13-mujmal", "titleAr": "المجمل", "children": [] },
+          { "id": "w13-mutashabih", "titleAr": "المتشابه", "children": [] }
+        ]
+      },
+      {
+        "id": "week-14",
+        "titleAr": "الأسبوع 14",
+        "titleTr": "14. Hafta",
+        "children": [
+          { "id": "w14-dalalah-manner-types", "titleAr": "أقسام اللفظ من حيث كيفية دلالته على المعنى", "children": [] },
+          { "id": "w14-hanafi-istidlal-methods", "titleAr": "طرق الاستدلال عند الحنفية", "children": [] },
+          { "id": "w14-ibarat-nass", "titleAr": "دلالة عبارة النص", "children": [] },
+          { "id": "w14-isharat-nass", "titleAr": "دلالة إشارة النص", "children": [] }
+        ]
+      },
+      {
+        "id": "week-15",
+        "titleAr": "الأسبوع 15",
+        "titleTr": "15. Hafta",
+        "children": [
+          { "id": "w15-completion-hanafi-dalalah-methods", "titleAr": "استكمال طرق الدلالة عند الحنفية", "children": [] },
+          { "id": "w15-mafhum-muwafaqah", "titleAr": "دلالة النص / مفهوم الموافقة", "children": [] },
+          { "id": "w15-dalalat-iqtida", "titleAr": "اقتضاء النص / دلالة الاقتضاء", "children": [] }
+        ]
+      },
+      {
+        "id": "week-16",
+        "titleAr": "الأسبوع 16",
+        "titleTr": "16. Hafta",
+        "children": [
+          { "id": "w16-mafhum-mukhalafah", "titleAr": "مفهوم المخالفة / دليل الخطاب", "children": [] },
+          { "id": "w16-mukhalafah-types", "titleAr": "أقسام مفهوم المخالفة", "children": [] },
+          { "id": "w16-mukhalafah-hujjiyyah", "titleAr": "حجية مفهوم المخالفة", "children": [] },
+          { "id": "w16-mukhalafah-conditions", "titleAr": "شروط العمل بمفهوم المخالفة", "children": [] }
+        ]
+      }
+    ]
+  }
+}

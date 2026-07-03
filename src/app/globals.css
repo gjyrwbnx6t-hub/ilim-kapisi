@@ -7,3 +7,57 @@
     @apply bg-surface text-slate-700 antialiased;
   }
 }
+
+@layer utilities {
+  /* Zihin şeması gezgini geçiş animasyonları (bağımlılıksız, hafif). */
+  @keyframes mindmap-enter-forward {
+    from {
+      opacity: 0;
+      transform: translateX(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes mindmap-enter-back {
+    from {
+      opacity: 0;
+      transform: translateX(-24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .mindmap-enter-forward {
+    animation: mindmap-enter-forward 0.22s ease-out;
+  }
+
+  .mindmap-enter-back {
+    animation: mindmap-enter-back 0.22s ease-out;
+  }
+
+  /* Yatay hafta şeridinde kaydırma çubuğunu inceltir. */
+  .mindmap-scroll {
+    scrollbar-width: thin;
+  }
+
+  .mindmap-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .mindmap-scroll::-webkit-scrollbar-thumb {
+    background-color: rgb(203 213 225);
+    border-radius: 9999px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mindmap-enter-forward,
+    .mindmap-enter-back {
+      animation: none;
+    }
+  }
+}

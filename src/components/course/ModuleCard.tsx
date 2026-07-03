@@ -1,9 +1,13 @@
+import Link from "next/link";
+
 interface ModuleCardProps {
   icon: string;
   title: string;
   description: string;
   /** İçerik henüz yoksa küçük "Yakında eklenecek" etiketi gösterilir. */
   available?: boolean;
+  /** Verilirse ve `available` true ise kart tıklanabilir hale gelir. */
+  href?: string;
 }
 
 export default function ModuleCard({
@@ -11,9 +15,16 @@ export default function ModuleCard({
   title,
   description,
   available = false,
+  href,
 }: ModuleCardProps) {
-  return (
-    <article className="flex h-full flex-col items-center rounded-xl border border-slate-200 bg-white p-8 text-center transition-colors hover:border-primary">
+  const isLink = Boolean(href && available);
+
+  const content = (
+    <article
+      className={`flex h-full flex-col items-center rounded-xl border border-slate-200 bg-white p-8 text-center transition-colors ${
+        isLink ? "group-hover:border-primary" : "hover:border-primary"
+      }`}
+    >
       <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-3xl">
         {icon}
       </div>
@@ -28,4 +39,14 @@ export default function ModuleCard({
       )}
     </article>
   );
+
+  if (isLink) {
+    return (
+      <Link href={href!} className="group block h-full">
+        {content}
+      </Link>
+    );
+  }
+
+  return content;
 }
