@@ -5,7 +5,7 @@ import StatusBadge from "@/components/ui/StatusBadge";
 import ModuleCard from "@/components/course/ModuleCard";
 import { courses, getCourseBySlug } from "@/data/courses";
 import { departmentTitleAr, getDepartmentById } from "@/data/departments";
-import { getMindMap } from "@/lib/content";
+import { getMindMap, getVocabulary } from "@/lib/content";
 
 interface CoursePageProps {
   params: Promise<{ slug: string }>;
@@ -69,6 +69,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
   const isShared = course.departments.length > 1;
   const hasContent = course.status === "ready";
   const hasMindMap = Boolean(getMindMap(course.contentSlug));
+  const hasVocabulary = Boolean(getVocabulary(course.contentSlug));
   const firstDepartment = getDepartmentById(course.departments[0]);
 
   return (
@@ -132,14 +133,26 @@ export default async function CoursePage({ params }: CoursePageProps) {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {STUDY_MODULES.map((module) => {
             const isMindMap = module.id === "mindmap";
+            const isKeywords = module.id === "keywords";
+
+            let available = hasContent;
+            let href: string | undefined;
+            if (isMindMap) {
+              available = hasMindMap;
+              href = `/courses/${course.slug}/mindmaps`;
+            } else if (isKeywords) {
+              available = hasVocabulary;
+              href = `/courses/${course.slug}/keywords`;
+            }
+
             return (
               <ModuleCard
                 key={module.id}
                 icon={module.icon}
                 title={module.title}
                 description={module.description}
-                available={isMindMap ? hasMindMap : hasContent}
-                href={isMindMap ? `/courses/${course.slug}/mindmaps` : undefined}
+                available={available}
+                href={href}
               />
             );
           })}

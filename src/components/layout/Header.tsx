@@ -1,19 +1,33 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import NavLinks from "@/components/layout/NavLinks";
+import { isSupabaseConfigured } from "@/lib/supabase/config";
+import { createClient } from "@/lib/supabase/server";
 
-const navLinks = [
-  { href: "/", label: "Ana Sayfa" },
-  { href: "/departments/usul-al-fiqh", label: "Fıkıh Usûlü" },
-  { href: "/departments/usul-al-din", label: "Din Usûlü" },
-];
+/**
+ * Üst çubuk. Oturum durumunu sunucuda okur; giriş varsa "Profilim/Çıkış",
+ * öğretmense "Panel" linkini gösterir. Supabase kurulu değilse yalnızca
+ * "Giriş" gösterilir (tıklanınca kurulum notu görünür).
+ */
+export default async function Header() {
+  let isAuthed = false;
+  let isTeacher = false;
 
-export default function Header() {
-  const pathname = usePathname();
+  if (isSupabaseConfigured()) {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+    if (user) {
+      isAuthed = true;
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+      isTeacher = (profile as { role?: string } | null)?.role === "teacher";
+    }
+  }
 
   return (
     <header className="flex items-center justify-between bg-ink px-[5%] py-4 text-white shadow-md">
@@ -24,28 +38,7 @@ export default function Header() {
         İlim Kapısı
       </Link>
 
-      <nav>
-        <ul className="flex gap-6 max-md:flex-col max-md:gap-2 max-md:text-right">
-          {navLinks.map((link) => {
-            const active = isActive(link.href);
-            return (
-              <li key={link.label}>
-                <Link
-                  href={link.href}
-                  className={`relative font-medium transition-colors ${
-                    active ? "text-gold" : "text-slate-200 hover:text-gold"
-                  }`}
-                >
-                  {link.label}
-                  {active && (
-                    <span className="absolute -bottom-1.5 left-0 h-0.5 w-full rounded-full bg-gold" />
-                  )}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+      <NavLinks isAuthed={isAuthed} isTeacher={isTeacher} />
     </header>
   );
 }

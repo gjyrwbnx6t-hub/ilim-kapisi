@@ -5,6 +5,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { Maximize2, Minimize2 } from "lucide-react";
 import type { MindMapNode } from "@/lib/types";
+import { logActivity } from "@/lib/activity";
 
 /**
  * Zihin Şeması Gezgini.
@@ -79,6 +80,28 @@ export default function MindMapViewer({
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [goPrev, goNext]);
+
+  // Seçili hafta üzerinde kısa süre kalınca ilerlemeyi kaydet (debounce ile
+  // hızlı gezinmede gereksiz olay üretilmez).
+  useEffect(() => {
+    if (weeks.length === 0) return;
+    const week = weeks[activeIndex];
+    if (!week) return;
+    const timer = window.setTimeout(() => {
+      logActivity({
+        type: "mindmap",
+        courseSlug,
+        unitId: week.id,
+        metadata: { weekTitle: week.titleAr, weekIndex: activeIndex },
+        progress: {
+          module: "mindmap",
+          lastWeek: activeIndex + 1,
+          percent: Math.round(((activeIndex + 1) / weeks.length) * 100),
+        },
+      });
+    }, 1200);
+    return () => window.clearTimeout(timer);
+  }, [activeIndex, weeks, courseSlug]);
 
   if (weeks.length === 0) {
     return (
