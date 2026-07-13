@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import StatusBadge from "@/components/ui/StatusBadge";
+import FavoriteStar from "@/components/ui/FavoriteStar";
 import ModuleCard from "@/components/course/ModuleCard";
 import { courses, getCourseBySlug } from "@/data/courses";
 import { departmentTitleAr, getDepartmentById } from "@/data/departments";
@@ -102,12 +103,15 @@ export default async function CoursePage({ params }: CoursePageProps) {
           )}
         </div>
 
-        <h1
-          dir="rtl"
-          className="font-arabic text-4xl font-bold leading-relaxed text-primary max-md:text-3xl"
-        >
-          {course.titleAr}
-        </h1>
+        <div className="mx-auto flex max-w-4xl items-center justify-center gap-3">
+          <h1
+            dir="rtl"
+            className="font-arabic text-4xl font-bold leading-relaxed text-primary max-md:text-3xl"
+          >
+            {course.titleAr}
+          </h1>
+          <FavoriteStar slug={course.slug} size="md" />
+        </div>
 
         <div dir="rtl" className="mt-4 flex flex-wrap justify-center gap-2">
           {course.departments.map((departmentId) => (

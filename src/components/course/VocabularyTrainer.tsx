@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { VocabularySet, VocabularyUnit } from "@/lib/types";
 import { logActivity } from "@/lib/activity";
+import { FrontWord, SpeakButton } from "@/components/course/VocabularySpeak";
 
 /**
  * Kelime Antrenörü — eski statik sitedeki 5 modlu kelime çalışma sisteminin
@@ -31,6 +32,41 @@ function normalize(text: string): string {
     .toLocaleLowerCase("tr-TR")
     .replace(/[.,?!]/g, "");
 }
+
+/** Arka yüzdeki kabul edilebilir cevapları çıkarır (slash / parantez). */
+function getAcceptableAnswers(back: string): string[] {
+  const answers = new Set<string>();
+  const arabicRe = /[\u0600-\u06FF\u0750-\u077F]/g;
+
+  const add = (raw: string) => {
+    const cleaned = raw.replace(arabicRe, "").trim();
+    if (!cleaned) return;
+    const n = normalize(cleaned);
+    if (n.length >= 1) answers.add(n);
+  };
+
+  for (const match of back.matchAll(/\(([^)]+)\)/g)) {
+    match[1].split("/").forEach((part) => add(part));
+  }
+
+  back
+    .replace(/\([^)]*\)/g, "")
+    .split("/")
+    .forEach((segment) => add(segment));
+
+  if (answers.size === 0) add(back.replace(arabicRe, ""));
+
+  return [...answers];
+}
+
+function isAnswerCorrect(input: string, back: string): boolean {
+  const n = normalize(input);
+  if (!n) return false;
+  return getAcceptableAnswers(back).some((a) => a === n);
+}
+
+const LEARNING_REQUEUE_AFTER = 3;
+const SWIPE_THRESHOLD = 72;
 
 function shuffle<T>(items: T[]): T[] {
   const copy = [...items];
@@ -231,26 +267,104 @@ function FlashcardsMode({ unit, frontDir }: ModeProps) {
   const words = unit.words;
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  const [dragX, setDragX] = useState(0);
+  const [dragging, setDragging] = useState(false);
+  const dragStartX = useRef(0);
+  const activePointer = useRef<number | null>(null);
+  const didDrag = useRef(false);
   const current = words[index];
 
   const goTo = (next: number) => {
     setIndex(next);
     setFlipped(false);
+    setDragX(0);
+    setDragging(false);
+    didDrag.current = false;
   };
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    activePointer.current = e.pointerId;
+    dragStartX.current = e.clientX;
+    setDragging(true);
+    didDrag.current = false;
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!dragging || activePointer.current !== e.pointerId) return;
+    const dx = e.clientX - dragStartX.current;
+    if (Math.abs(dx) > 8) didDrag.current = true;
+    setDragX(dx);
+  };
+
+  const onPointerUp = (e: React.PointerEvent) => {
+    if (activePointer.current !== e.pointerId) return;
+    activePointer.current = null;
+    setDragging(false);
+
+    if (dragX <= -SWIPE_THRESHOLD && index < words.length - 1) {
+      goTo(index + 1);
+      return;
+    }
+    if (dragX >= SWIPE_THRESHOLD && index > 0) {
+      goTo(index - 1);
+      return;
+    }
+    setDragX(0);
+  };
+
+  const handleFlip = () => {
+    if (didDrag.current) {
+      didDrag.current = false;
+      return;
+    }
+    setFlipped((value) => !value);
+  };
+
+  const canGoPrev = index > 0;
+  const canGoNext = index < words.length - 1;
+  const leftHintOpacity =
+    dragX < 0 && canGoNext ? Math.min(0.35, -dragX / 140) : 0;
+  const rightHintOpacity =
+    dragX > 0 && canGoPrev ? Math.min(0.35, dragX / 140) : 0;
 
   return (
     <div className="flex flex-col items-center [perspective:1000px]">
       <button
         type="button"
-        onClick={() => setFlipped((value) => !value)}
-        className="relative h-80 w-full max-w-xl cursor-pointer rounded-xl transition-transform duration-500 [transform-style:preserve-3d]"
-        style={{ transform: flipped ? "rotateX(180deg)" : "rotateX(0deg)" }}
-        aria-label="Kartı çevir"
+        onClick={handleFlip}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        className="relative h-80 w-full max-w-xl cursor-grab touch-none select-none rounded-xl transition-transform duration-500 active:cursor-grabbing [transform-style:preserve-3d]"
+        style={{
+          transform: `translateX(${dragX}px) rotateY(${dragX * 0.04}deg) rotateX(${flipped ? 180 : 0}deg)`,
+          transition: dragging ? "none" : "transform 0.5s",
+        }}
+        aria-label="Kartı çevir veya sürükleyerek geç"
       >
+        <span
+          className="pointer-events-none absolute inset-0 rounded-xl bg-primary"
+          style={{ opacity: leftHintOpacity }}
+          aria-hidden
+        />
+        <span
+          className="pointer-events-none absolute inset-0 rounded-xl bg-slate-400"
+          style={{ opacity: rightHintOpacity }}
+          aria-hidden
+        />
+
         <span className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-white shadow-md [backface-visibility:hidden]">
           <span className="absolute right-4 top-4 rounded-full border border-emerald-500 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
             Çevirmek İçin Tıkla
           </span>
+          <SpeakButton
+            text={current.front}
+            frontDir={frontDir}
+            stopPropagation
+            className={`absolute bottom-4 ${frontDir === "rtl" ? "left-4" : "right-4"}`}
+          />
           <span
             dir={frontDir}
             className={`px-6 text-4xl font-bold text-slate-900 ${
@@ -265,7 +379,11 @@ function FlashcardsMode({ unit, frontDir }: ModeProps) {
         </span>
       </button>
 
-      <div className="mt-9 flex w-full max-w-xl justify-center gap-4">
+      <p className="mt-4 text-center text-xs text-surface-muted">
+        Sola sürükle → Sonraki kart · Sağa sürükle → Önceki kart
+      </p>
+
+      <div className="mt-5 flex w-full max-w-xl justify-center gap-4">
         <button
           type="button"
           onClick={() => index > 0 && goTo(index - 1)}
@@ -343,108 +461,221 @@ function CompletionScreen({
 
 function LearningMode({ unit, frontDir, onComplete }: ModeProps) {
   const words = unit.words;
-  const [index, setIndex] = useState(0);
+  const total = words.length;
+
+  const [queue, setQueue] = useState<number[]>(() =>
+    words.map((_, i) => i),
+  );
+  const [knownCount, setKnownCount] = useState(0);
   const [score, setScore] = useState(0);
   const [value, setValue] = useState("");
   const [checked, setChecked] = useState(false);
   const [correct, setCorrect] = useState(false);
+  const [dragX, setDragX] = useState(0);
+  const [dragging, setDragging] = useState(false);
   const loggedRef = useRef(false);
+  const dragStartX = useRef(0);
+  const activePointer = useRef<number | null>(null);
 
   const restart = () => {
-    setIndex(0);
+    setQueue(words.map((_, i) => i));
+    setKnownCount(0);
     setScore(0);
     setValue("");
     setChecked(false);
     setCorrect(false);
+    setDragX(0);
+    setDragging(false);
     loggedRef.current = false;
   };
 
-  useEffect(() => {
-    if (index >= words.length && !loggedRef.current) {
-      loggedRef.current = true;
-      onComplete?.(score);
-    }
-  }, [index, words.length, score, onComplete]);
-
-  if (index >= words.length) {
-    return <CompletionScreen score={score} onRestart={restart} />;
-  }
-
-  const current = words[index];
-
-  const check = () => {
-    if (value === "" || checked) return;
-    const isCorrect = normalize(value) === normalize(current.back);
-    setCorrect(isCorrect);
-    setChecked(true);
-    if (isCorrect) setScore((s) => s + 10);
-  };
-
-  const next = () => {
-    setIndex((i) => i + 1);
+  const resetCard = useCallback(() => {
     setValue("");
     setChecked(false);
     setCorrect(false);
+    setDragX(0);
+    setDragging(false);
+  }, []);
+
+  const markKnown = useCallback(() => {
+    setQueue((q) => (q.length === 0 ? q : q.slice(1)));
+    setKnownCount((k) => k + 1);
+    setScore((s) => s + 10);
+    resetCard();
+  }, [resetCard]);
+
+  const markUnknown = useCallback(() => {
+    setQueue((q) => {
+      if (q.length <= 1) return q;
+      const [first, ...rest] = q;
+      const pos = Math.min(LEARNING_REQUEUE_AFTER, rest.length);
+      return [...rest.slice(0, pos), first, ...rest.slice(pos)];
+    });
+    resetCard();
+  }, [resetCard]);
+
+  useEffect(() => {
+    if (queue.length === 0 && knownCount >= total && !loggedRef.current) {
+      loggedRef.current = true;
+      onComplete?.(score);
+    }
+  }, [queue.length, knownCount, total, score, onComplete]);
+
+  if (queue.length === 0 && knownCount >= total) {
+    return <CompletionScreen score={score} onRestart={restart} />;
+  }
+
+  const current = words[queue[0]];
+  if (!current) {
+    return <CompletionScreen score={score} onRestart={restart} />;
+  }
+
+  const check = () => {
+    if (value === "" || checked) return;
+    const ok = isAnswerCorrect(value, current.back);
+    setCorrect(ok);
+    setChecked(true);
   };
+
+  const handleCheckedNext = () => {
+    if (correct) markKnown();
+    else markUnknown();
+  };
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    if (checked) return;
+    activePointer.current = e.pointerId;
+    dragStartX.current = e.clientX;
+    setDragging(true);
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  };
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!dragging || activePointer.current !== e.pointerId) return;
+    setDragX(e.clientX - dragStartX.current);
+  };
+
+  const onPointerUp = (e: React.PointerEvent) => {
+    if (activePointer.current !== e.pointerId) return;
+    activePointer.current = null;
+    setDragging(false);
+
+    if (dragX <= -SWIPE_THRESHOLD) {
+      markKnown();
+      return;
+    }
+    if (dragX >= SWIPE_THRESHOLD) {
+      markUnknown();
+      return;
+    }
+    setDragX(0);
+  };
+
+  const greenOpacity = dragX < 0 ? Math.min(0.55, -dragX / 140) : 0;
+  const redOpacity = dragX > 0 ? Math.min(0.55, dragX / 140) : 0;
 
   return (
     <div className="flex flex-col items-center">
-      <div className="w-full max-w-xl rounded-xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-        <h3 className="mb-5 text-surface-muted">Doğru çeviriyi yazın:</h3>
-        <h2
-          dir={frontDir}
-          className={`mb-7 text-4xl font-bold text-slate-900 ${
-            frontDir === "rtl" ? "font-arabic" : ""
-          }`}
-        >
-          {current.front}
-        </h2>
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key !== "Enter") return;
-            if (checked) {
-              next();
-            } else {
-              check();
-            }
-          }}
-          disabled={checked}
-          placeholder="Türkçe çeviriyi yazın"
-          autoFocus
-          className="mb-5 w-4/5 rounded-lg border-2 border-primary px-4 py-3.5 text-center text-lg outline-none disabled:bg-slate-50"
+      <div
+        className="relative w-full max-w-xl touch-none select-none overflow-hidden rounded-xl border border-slate-200 bg-white p-8 text-center shadow-sm"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        style={{
+          transform: `translateX(${dragX}px) rotate(${dragX * 0.04}deg)`,
+          transition: dragging ? "none" : "transform 0.25s ease",
+        }}
+      >
+        <div
+          className="pointer-events-none absolute inset-0 bg-emerald-500"
+          style={{ opacity: greenOpacity }}
+          aria-hidden
         />
-        {checked && (
-          <div
-            className={`mb-5 font-semibold ${
-              correct ? "text-emerald-500" : "text-red-500"
-            }`}
-          >
-            {correct ? "✅ Doğru!" : `❌ Yanlış! Doğru: ${current.back}`}
-          </div>
-        )}
-        {!checked ? (
-          <button
-            type="button"
-            onClick={check}
-            className="rounded-lg bg-primary px-10 py-3 font-bold text-white transition-colors hover:bg-primary-dark"
-          >
-            Kontrol Et
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={next}
-            className="rounded-lg bg-emerald-500 px-10 py-3 font-bold text-white transition-colors hover:bg-emerald-600"
-          >
-            Sonraki Soru
-          </button>
-        )}
+        <div
+          className="pointer-events-none absolute inset-0 bg-red-500"
+          style={{ opacity: redOpacity }}
+          aria-hidden
+        />
+
+        <div className="relative z-10">
+          <h3 className="mb-5 text-surface-muted">Doğru çeviriyi yazın:</h3>
+          <p className="mb-2 text-xs text-surface-muted">
+            Birden fazla anlam varsa yalnızca birini yazmanız yeterli.
+          </p>
+          <FrontWord
+            text={current.front}
+            frontDir={frontDir}
+            className="mb-7"
+          />
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key !== "Enter") return;
+              if (checked) handleCheckedNext();
+              else check();
+            }}
+            disabled={checked}
+            placeholder="Türkçe çeviriyi yazın"
+            autoFocus
+            className="mb-5 w-4/5 rounded-lg border-2 border-primary px-4 py-3.5 text-center text-lg outline-none disabled:bg-slate-50"
+          />
+          {checked && (
+            <div
+              className={`mb-5 font-semibold ${
+                correct ? "text-emerald-500" : "text-red-500"
+              }`}
+            >
+              {correct
+                ? "✅ Doğru!"
+                : `❌ Yanlış! Doğru: ${current.back}`}
+            </div>
+          )}
+          {!checked ? (
+            <button
+              type="button"
+              onClick={check}
+              className="rounded-lg bg-primary px-10 py-3 font-bold text-white transition-colors hover:bg-primary-dark"
+            >
+              Kontrol Et
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={handleCheckedNext}
+              className="rounded-lg bg-emerald-500 px-10 py-3 font-bold text-white transition-colors hover:bg-emerald-600"
+            >
+              Sonraki Soru
+            </button>
+          )}
+        </div>
       </div>
-      <h3 className="mt-5 font-semibold text-primary">
-        Skor: {score} | Soru: {index + 1}/{words.length}
+
+      <div className="mt-6 flex w-full max-w-xl gap-3">
+        <button
+          type="button"
+          onClick={markUnknown}
+          className="flex-1 rounded-lg border-2 border-red-500 bg-white py-3.5 font-bold text-red-600 transition-colors hover:bg-red-50"
+        >
+          Bilmiyorum
+        </button>
+        <button
+          type="button"
+          onClick={markKnown}
+          className="flex-1 rounded-lg bg-emerald-600 py-3.5 font-bold text-white transition-colors hover:bg-emerald-700"
+        >
+          Biliyorum
+        </button>
+      </div>
+
+      <p className="mt-3 text-center text-xs text-surface-muted">
+        Sola sürükle → Biliyorum (yeşil) · Sağa sürükle → Tekrar öğren (kırmızı)
+      </p>
+
+      <h3 className="mt-4 font-semibold text-primary">
+        Skor: {score} | Ezberlenen: {knownCount}/{total}
       </h3>
     </div>
   );
@@ -498,14 +729,7 @@ function MultipleChoiceMode({ unit, frontDir, onComplete }: ModeProps) {
   return (
     <div className="flex flex-col items-center">
       <div className="w-full max-w-2xl rounded-xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-        <h2
-          dir={frontDir}
-          className={`mb-7 text-4xl font-bold text-slate-900 ${
-            frontDir === "rtl" ? "font-arabic" : ""
-          }`}
-        >
-          {current.front}
-        </h2>
+        <FrontWord text={current.front} frontDir={frontDir} className="mb-7" />
         <div className="flex flex-wrap justify-center">
           {options.map((option) => {
             const isAnswer = option === current.back;
@@ -606,14 +830,11 @@ function TrueFalseMode({ unit, frontDir, onComplete }: ModeProps) {
     <div className="flex flex-col items-center">
       <div className="w-full max-w-xl rounded-xl border border-slate-200 bg-white p-8 text-center shadow-sm">
         <h3 className="mb-5 text-surface-muted">Bu çeviri doğru mu?</h3>
-        <h2
-          dir={frontDir}
-          className={`mb-2.5 text-4xl font-bold text-slate-900 ${
-            frontDir === "rtl" ? "font-arabic" : ""
-          }`}
-        >
-          {current.front}
-        </h2>
+        <FrontWord
+          text={current.front}
+          frontDir={frontDir}
+          className="mb-2.5"
+        />
         <h1 className="mb-7 text-xl font-bold text-primary">{shown.text}</h1>
         <div className="flex justify-center gap-5">
           <button

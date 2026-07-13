@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Course } from "@/data/courses";
 import { DOMAIN_META } from "@/data/domains";
 import { DOMAIN_ICONS } from "@/data/domainIcons";
+import FavoriteStar from "./FavoriteStar";
 import StatusBadge from "./StatusBadge";
 
 export default function CourseCard({ course }: { course: Course }) {
@@ -12,7 +13,7 @@ export default function CourseCard({ course }: { course: Course }) {
   return (
     <Link href={`/courses/${course.slug}`} className="group block h-full">
       <article
-        className={`flex h-full flex-col justify-between rounded-lg border border-slate-200 border-l-[6px] ${domain.borderClass} ${domain.cardTintClass} p-5 transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg`}
+        className={`relative flex h-full flex-col justify-between rounded-lg border border-slate-200 border-l-[6px] ${domain.borderClass} ${domain.cardTintClass} p-5 transition-all duration-200 hover:-translate-y-1 hover:border-slate-300 hover:shadow-lg`}
       >
         <div className="mb-3 flex items-start justify-between gap-2">
           <StatusBadge status={course.status} />
@@ -40,12 +41,16 @@ export default function CourseCard({ course }: { course: Course }) {
           {course.titleAr}
         </h3>
 
-        <div className="mt-4 flex flex-wrap items-center gap-1.5">
+        <div className="mt-4 flex flex-wrap items-center gap-1.5 pr-8">
           <span
             className={`rounded px-2 py-0.5 text-xs font-semibold ${domain.badgeClass}`}
           >
             {domain.labelTr}
           </span>
+        </div>
+
+        <div className="absolute bottom-3 right-3">
+          <FavoriteStar slug={course.slug} />
         </div>
       </article>
     </Link>

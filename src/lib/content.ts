@@ -32,6 +32,15 @@ export function getMindMap(contentSlug: string): MindMap | undefined {
 
 const VOCABULARY_DIR = path.join(process.cwd(), "content", "vocabulary");
 
+export interface VocabularySummary {
+  hasVocabulary: boolean;
+  unitCount: number;
+  wordCount: number;
+  frontDir: "rtl" | "ltr";
+  titleTr?: string;
+  titleAr?: string;
+}
+
 /**
  * Bir dersin kelime kartı setini okur. Dosya yoksa `undefined` döner
  * ("Yakında" davranışı korunur). Set, üniteler halinde gruplanmış
@@ -46,4 +55,30 @@ export function getVocabulary(contentSlug: string): VocabularySet | undefined {
 
   const raw = fs.readFileSync(filePath, "utf-8");
   return JSON.parse(raw) as VocabularySet;
+}
+
+/**
+ * Kelime arşivini kopyalamadan ders listeleri için hafif özet üretir.
+ * Dosya yoksa "bekliyor" durumunu temsil eden boş değerler döner.
+ */
+export function getVocabularySummary(contentSlug: string): VocabularySummary {
+  const set = getVocabulary(contentSlug);
+
+  if (!set) {
+    return {
+      hasVocabulary: false,
+      unitCount: 0,
+      wordCount: 0,
+      frontDir: "rtl",
+    };
+  }
+
+  return {
+    hasVocabulary: true,
+    unitCount: set.units.length,
+    wordCount: set.units.reduce((sum, unit) => sum + unit.words.length, 0),
+    frontDir: set.frontDir ?? "rtl",
+    titleTr: set.titleTr,
+    titleAr: set.titleAr,
+  };
 }

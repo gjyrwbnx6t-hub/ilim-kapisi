@@ -1,4 +1,5 @@
 import DepartmentCard from "@/components/ui/DepartmentCard";
+import FavoriteCoursesSection from "@/components/home/FavoriteCoursesSection";
 import { departments } from "@/data/departments";
 
 export default function HomePage() {
@@ -13,6 +14,8 @@ export default function HomePage() {
           bölümü seç, ders kategorilerine ve derslerin içeriğine ulaş.
         </p>
       </section>
+
+      <FavoriteCoursesSection />
 
       <section className="px-[5%] py-16">
         <h2 className="mb-10 text-center text-2xl font-bold text-slate-900">

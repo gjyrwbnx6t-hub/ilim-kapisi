@@ -8,6 +8,7 @@ const baseLinks = [
   { href: "/", label: "Ana Sayfa" },
   { href: "/departments/usul-al-fiqh", label: "Fıkıh Usûlü" },
   { href: "/departments/usul-al-din", label: "Din Usûlü" },
+  { href: "/rearapca", label: "Rearapça" },
 ];
 
 interface NavLinksProps {
