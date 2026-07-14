@@ -1,0 +1,1710 @@
+{
+  "contentSlug": "hadith-sciences",
+  "titleTr": "Hadis İlimleri — Anahtar Kelimeler",
+  "titleAr": "علوم الحديث",
+  "frontDir": "rtl",
+  "units": [
+    {
+      "id": "intro",
+      "titleTr": "Hadis Usulüne Giriş",
+      "titleAr": "مَدْخَلٌ إِلَى عِلْمِ مُصْطَلَحِ الْحَدِيثِ",
+      "words": [
+        {
+          "front": "عِلْمُ مُصْطَلَحِ الْحَدِيثِ",
+          "back": "Hadis usulü ilmi"
+        },
+        {
+          "front": "السُّنَّةُ النَّبَوِيَّةُ",
+          "back": "Nebevî sünnet"
+        },
+        {
+          "front": "الرِّوَايَةُ",
+          "back": "Rivayet, nakletme"
+        },
+        {
+          "front": "نَقْلُ الْأَخْبَارِ",
+          "back": "Haberlerin nakledilmesi"
+        },
+        {
+          "front": "ضَبْطُ الْحَدِيثِ",
+          "back": "Hadisin doğru biçimde korunması"
+        },
+        {
+          "front": "التَّثَبُّتُ",
+          "back": "Doğruluğunu araştırma, teyit etme"
+        },
+        {
+          "front": "قَبُولُ الْأَخْبَارِ",
+          "back": "Haberleri kabul etme"
+        },
+        {
+          "front": "رَدُّ الْأَخْبَارِ",
+          "back": "Haberleri reddetme"
+        },
+        {
+          "front": "الْإِسْنَادُ",
+          "back": "Rivayeti kaynağına dayandırma, isnad"
+        },
+        {
+          "front": "الْجَرْحُ وَالتَّعْدِيلُ",
+          "back": "Râvileri tenkit ve değerlendirme"
+        },
+        {
+          "front": "الرُّوَاةُ",
+          "back": "Râviler"
+        },
+        {
+          "front": "الْمُتَّصِلُ",
+          "back": "Senedi kesintisiz olan"
+        },
+        {
+          "front": "الْمُنْقَطِعُ",
+          "back": "Senedi kesintili olan"
+        },
+        {
+          "front": "الْعِلَلُ الْخَفِيَّةُ",
+          "back": "Gizli illetler, gizli kusurlar"
+        },
+        {
+          "front": "تَحَمُّلُ الْحَدِيثِ",
+          "back": "Hadisi hocadan alma"
+        },
+        {
+          "front": "أَدَاءُ الْحَدِيثِ",
+          "back": "Hadisi başkasına rivayet etme"
+        },
+        {
+          "front": "نَشْأَةُ الْعِلْمِ",
+          "back": "İlmin doğuşu"
+        },
+        {
+          "front": "أَطْوَارُ الْعِلْمِ",
+          "back": "İlmin gelişim aşamaları"
+        },
+        {
+          "front": "التَّصْنِيفُ",
+          "back": "Eser yazma, telif"
+        },
+        {
+          "front": "الْمُصَنَّفَاتُ",
+          "back": "Telif edilmiş eserler"
+        }
+      ]
+    },
+    {
+      "id": "temel-terimler",
+      "titleTr": "Temel Hadis Terimleri",
+      "titleAr": "التَّعْرِيفَاتُ الْأَوَّلِيَّةُ",
+      "words": [
+        {
+          "front": "الْحَدِيثُ",
+          "back": "Hadis"
+        },
+        {
+          "front": "الْخَبَرُ",
+          "back": "Haber, rivayet"
+        },
+        {
+          "front": "الْأَثَرُ",
+          "back": "Eser; sahabe veya tâbiîne nispet edilen rivayet"
+        },
+        {
+          "front": "الْإِسْنَادُ",
+          "back": "Hadisi söyleyenine isnat etme; isnad"
+        },
+        {
+          "front": "السَّنَدُ",
+          "back": "Hadisi metne ulaştıran râviler zinciri"
+        },
+        {
+          "front": "الْمَتْنُ",
+          "back": "Senedin sonunda bulunan hadis sözü"
+        },
+        {
+          "front": "الْمُسْنَدُ",
+          "back": "Müsned; senedi birleştirilmiş hadis veya sahabilere göre düzenlenen eser"
+        },
+        {
+          "front": "الْمُسْنِدُ",
+          "back": "Hadisi senediyle rivayet eden kişi"
+        },
+        {
+          "front": "الْمُحَدِّثُ",
+          "back": "Hadis rivayeti ve ilimleriyle uğraşan âlim"
+        },
+        {
+          "front": "الْحَافِظُ",
+          "back": "Hadisleri ve râvilerini geniş ölçüde bilen âlim"
+        },
+        {
+          "front": "الْحَاكِمُ",
+          "back": "Hadis ilimlerinde çok geniş bilgi sahibi âlim"
+        },
+        {
+          "front": "الْقَوَاعِدُ",
+          "back": "Kurallar, esaslar"
+        },
+        {
+          "front": "أَحْوَالُ السَّنَدِ وَالْمَتْنِ",
+          "back": "Senedin ve metnin durumları"
+        },
+        {
+          "front": "الْقَبُولُ وَالرَّدُّ",
+          "back": "Kabul ve ret"
+        },
+        {
+          "front": "تَمْيِيزُ الصَّحِيحِ مِنَ السَّقِيمِ",
+          "back": "Sahih olanı kusurlu olandan ayırma"
+        },
+        {
+          "front": "أُضِيفَ إِلَى",
+          "back": "Birine nispet edildi"
+        },
+        {
+          "front": "قَوْلٌ أَوْ فِعْلٌ أَوْ تَقْرِيرٌ أَوْ صِفَةٌ",
+          "back": "Söz, fiil, onay veya vasıf"
+        },
+        {
+          "front": "مُرَادِفٌ",
+          "back": "Eş anlamlı"
+        },
+        {
+          "front": "مُغَايِرٌ",
+          "back": "Anlamı farklı olan"
+        },
+        {
+          "front": "أَعَمُّ",
+          "back": "Daha kapsamlı, daha genel"
+        },
+        {
+          "front": "التَّابِعُونَ",
+          "back": "Tâbiîn"
+        },
+        {
+          "front": "عَزْوُ الْحَدِيثِ إِلَى قَائِلِهِ",
+          "back": "Hadisi söyleyenine nispet etme"
+        },
+        {
+          "front": "سِلْسِلَةُ الرِّجَالِ",
+          "back": "Râviler zinciri"
+        },
+        {
+          "front": "الْمُوَصِّلَةُ إِلَى الْمَتْنِ",
+          "back": "Metne ulaştıran"
+        },
+        {
+          "front": "الْمَرْوِيَّاتُ",
+          "back": "Rivayet edilen hadisler"
+        },
+        {
+          "front": "رِوَايَةً وَدِرَايَةً",
+          "back": "Rivayet ve ilmî inceleme yönünden"
+        },
+        {
+          "front": "أَحْوَالُ الرُّوَاةِ",
+          "back": "Râvilerin durumları"
+        }
+      ]
+    },
+    {
+      "id": "ulasma-tasnifi",
+      "titleTr": "Hadisin Bize Ulaşma Yollarına Göre Tasnifi",
+      "titleAr": "تَقْسِيمُ الْخَبَرِ بِالنِّسْبَةِ إِلَى وُصُولِهِ إِلَيْنَا",
+      "words": [
+        {
+          "front": "يَنْقَسِمُ إِلَى",
+          "back": "… kısma ayrılır"
+        },
+        {
+          "front": "بِالنِّسْبَةِ إِلَى",
+          "back": "… bakımından, … açısından"
+        },
+        {
+          "front": "طُرُقٌ غَيْرُ مَحْصُورَةٍ",
+          "back": "Sayısı belirli olmayan rivayet yolları"
+        },
+        {
+          "front": "طُرُقٌ مَحْصُورَةٌ بِعَدَدٍ مُعَيَّنٍ",
+          "back": "Belirli bir sayıyla sınırlı rivayet yolları"
+        },
+        {
+          "front": "التَّتَابُعُ",
+          "back": "Peş peşe gelme, birbirini takip etme"
+        },
+        {
+          "front": "طَبَقَاتُ السَّنَدِ",
+          "back": "Senedin tabakaları"
+        },
+        {
+          "front": "تَحِيلُ الْعَادَةُ",
+          "back": "Normal şartlar imkânsız sayar"
+        },
+        {
+          "front": "التَّوَاطُؤُ عَلَى الْكَذِبِ",
+          "back": "Yalan üzerinde anlaşma"
+        },
+        {
+          "front": "شُرُوطُ التَّوَاتُرِ",
+          "back": "Tevâtürün şartları"
+        },
+        {
+          "front": "مُسْتَنَدُ الْخَبَرِ",
+          "back": "Haberin dayandığı kaynak"
+        },
+        {
+          "front": "الْحِسُّ",
+          "back": "Duyusal algı; görme, işitme veya dokunma"
+        },
+        {
+          "front": "يُفِيدُ الْعِلْمَ",
+          "back": "Bilgi ifade eder, bilgi meydana getirir"
+        },
+        {
+          "front": "الْعِلْمُ الضَّرُورِيُّ",
+          "back": "Düşünmeye ihtiyaç bırakmadan oluşan zorunlu bilgi"
+        },
+        {
+          "front": "التَّصْدِيقُ الْجَازِمُ",
+          "back": "Kesin ve tereddütsüz kabul"
+        },
+        {
+          "front": "مَقْبُولٌ",
+          "back": "Kabul edilen, makbul"
+        },
+        {
+          "front": "أَحْوَالُ الرُّوَاةِ",
+          "back": "Râvilerin durumları"
+        },
+        {
+          "front": "الْمُتَوَاتِرُ اللَّفْظِيُّ",
+          "back": "Lafzı ve anlamı mütevâtir olan haber"
+        },
+        {
+          "front": "الْمُتَوَاتِرُ الْمَعْنَوِيُّ",
+          "back": "Ortak anlamı mütevâtir olan haber"
+        },
+        {
+          "front": "الْقَدْرُ الْمُشْتَرَكُ",
+          "back": "Rivayetlerdeki ortak unsur veya ortak anlam"
+        },
+        {
+          "front": "مَجْمُوعُ الطُّرُقِ",
+          "back": "Rivayet yollarının bütünü"
+        },
+        {
+          "front": "الْعِلْمُ النَّظَرِيُّ",
+          "back": "İnceleme ve delillendirmeyle elde edilen bilgi"
+        },
+        {
+          "front": "النَّظَرُ وَالِاسْتِدْلَالُ",
+          "back": "Düşünme, inceleme ve delilden sonuca ulaşma"
+        }
+      ]
+    },
+    {
+      "id": "ahad-haber",
+      "titleTr": "Rivayet Yolu Sayısına Göre Âhâd Haber",
+      "titleAr": "خَبَرُ الْآحَادِ بِحَسَبِ عَدَدِ الطُّرُقِ",
+      "words": [
+        {
+          "front": "طَرِيقٌ — طُرُقٌ",
+          "back": "Rivayet yolu"
+        },
+        {
+          "front": "طَبَقَةٌ — طَبَقَاتٌ",
+          "back": "Tabaka, râvi kuşağı"
+        },
+        {
+          "front": "رَاوٍ — رُوَاةٌ",
+          "back": "Râvi"
+        },
+        {
+          "front": "إِسْنَادٌ — أَسَانِيدُ",
+          "back": "İsnad"
+        },
+        {
+          "front": "رِوَايَةٌ — رِوَايَاتٌ",
+          "back": "Rivayet"
+        },
+        {
+          "front": "طَرَفٌ — أَطْرَافٌ",
+          "back": "Taraf, uç"
+        },
+        {
+          "front": "أَصْلٌ — أُصُولٌ",
+          "back": "Asıl, başlangıç"
+        },
+        {
+          "front": "مَوْضِعٌ — مَوَاضِعُ",
+          "back": "Yer, konum"
+        },
+        {
+          "front": "مَتْنٌ — مُتُونٌ",
+          "back": "Metin"
+        },
+        {
+          "front": "وَجْهٌ — وُجُوهٌ",
+          "back": "Rivayet yönü/yolu"
+        },
+        {
+          "front": "بَلَدٌ — بُلْدَانٌ",
+          "back": "Belde, ülke"
+        },
+        {
+          "front": "جِهَةٌ — جِهَاتٌ",
+          "back": "Bölge, yön"
+        },
+        {
+          "front": "رَوَى — يَرْوِي",
+          "back": "Rivayet etti"
+        },
+        {
+          "front": "بَلَغَ — يَبْلُغُ",
+          "back": "Ulaştı"
+        },
+        {
+          "front": "اِشْتَهَرَ — يَشْتَهِرُ",
+          "back": "Yaygınlaştı, meşhur oldu"
+        },
+        {
+          "front": "اِشْتَرَطَ — يَشْتَرِطُ",
+          "back": "Şart koştu"
+        },
+        {
+          "front": "اِسْتَوَى — يَسْتَوِي",
+          "back": "Eşit oldu"
+        },
+        {
+          "front": "قَلَّ — يَقِلُّ",
+          "back": "Azaldı, az oldu"
+        },
+        {
+          "front": "زَادَ — يَزِيدُ",
+          "back": "Arttı"
+        },
+        {
+          "front": "أَطْلَقَ — يُطْلِقُ",
+          "back": "Bir adı/terimi kullandı"
+        },
+        {
+          "front": "اِنْفَرَدَ — يَنْفَرِدُ",
+          "back": "Rivayette tek kaldı"
+        }
+      ]
+    },
+    {
+      "id": "makbul-hadis-turleri",
+      "titleTr": "Makbul Hadis Türleri",
+      "titleAr": "أَقْسَامُ الْخَبَرِ الْمَقْبُولِ",
+      "words": [
+        {
+          "front": "اِتِّصَالُ السَّنَدِ",
+          "back": "Senedin kesintisiz olması"
+        },
+        {
+          "front": "عَدَالَةُ الرُّوَاةِ",
+          "back": "Râvilerin güvenilir ve dürüst olması"
+        },
+        {
+          "front": "ضَبْطُ الرُّوَاةِ",
+          "back": "Râvilerin rivayeti sağlam biçimde koruması"
+        },
+        {
+          "front": "عَدَمُ الشُّذُوذِ",
+          "back": "Daha güvenilir rivayete aykırılık bulunmaması"
+        },
+        {
+          "front": "عَدَمُ الْعِلَّةِ",
+          "back": "Gizli kusur bulunmaması"
+        },
+        {
+          "front": "شَرْطٌ — شُرُوطٌ",
+          "back": "Şart"
+        },
+        {
+          "front": "مَرْتَبَةٌ — مَرَاتِبُ",
+          "back": "Derece"
+        },
+        {
+          "front": "رَاوٍ — رُوَاةٌ",
+          "back": "Rivayet eden kişi"
+        },
+        {
+          "front": "عِلَّةٌ — عِلَلٌ",
+          "back": "Gizli kusur"
+        },
+        {
+          "front": "عَدْلٌ — عُدُولٌ",
+          "back": "Dürüst ve güvenilir râvi"
+        },
+        {
+          "front": "ضَابِطٌ — ضَابِطُونَ",
+          "back": "Rivayetini sağlam koruyan"
+        },
+        {
+          "front": "ثِقَةٌ — ثِقَاتٌ",
+          "back": "Güvenilir râvi"
+        },
+        {
+          "front": "مُرُوءَةٌ",
+          "back": "Kişilik saygınlığı, düzgün davranış"
+        },
+        {
+          "front": "حِفْظٌ",
+          "back": "Hafıza, ezber gücü"
+        },
+        {
+          "front": "صِدْقٌ",
+          "back": "Doğruluk, doğru sözlülük"
+        },
+        {
+          "front": "إِتْقَانٌ",
+          "back": "Sağlamlık, titizlik"
+        },
+        {
+          "front": "قُوَّةٌ",
+          "back": "Güç, kuvvet"
+        },
+        {
+          "front": "ضَعْفٌ",
+          "back": "Zayıflık"
+        },
+        {
+          "front": "اِتَّصَلَ — يَتَّصِلُ",
+          "back": "Kesintisiz biçimde bağlandı"
+        },
+        {
+          "front": "اِتَّصَفَ — يَتَّصِفُ",
+          "back": "Bir özellikle vasıflandı"
+        },
+        {
+          "front": "ضَبَطَ — يَضْبِطُ",
+          "back": "Sağlam biçimde korudu"
+        },
+        {
+          "front": "تَوَافَرَ — يَتَوَافَرُ",
+          "back": "Mevcut oldu, bir araya geldi"
+        },
+        {
+          "front": "اِخْتَلَّ — يَخْتَلُّ",
+          "back": "Eksildi, şartı bozuldu"
+        },
+        {
+          "front": "تَحَقَّقَ — يَتَحَقَّقُ",
+          "back": "Gerçekleşti"
+        },
+        {
+          "front": "خَفَّ — يَخِفُّ",
+          "back": "Azaldı, hafifledi"
+        },
+        {
+          "front": "اِحْتَجَّ — يَحْتَجُّ",
+          "back": "Delil olarak kullandı"
+        },
+        {
+          "front": "ضَعَّفَ — يُضَعِّفُ",
+          "back": "Zayıf kabul etti"
+        },
+        {
+          "front": "اِنْضَمَّ — يَنْضَمُّ",
+          "back": "Katıldı, birleşti"
+        },
+        {
+          "front": "تَعَدَّدَ — يَتَعَدَّدُ",
+          "back": "Birden fazla oldu"
+        },
+        {
+          "front": "اِرْتَقَى — يَرْتَقِي",
+          "back": "Daha yüksek dereceye çıktı"
+        }
+      ]
+    },
+    {
+      "id": "amel-edilen-makbul",
+      "titleTr": "Kendisiyle Amel Edilen ve Edilmeyen Makbul Hadisler",
+      "titleAr": "الْمَقْبُولُ الْمَعْمُولُ بِهِ وَغَيْرُ الْمَعْمُولِ بِهِ",
+      "words": [
+        {
+          "front": "مُعَارَضَةٌ — مُعَارَضَاتٌ",
+          "back": "Karşı karşıya gelme, çatışma"
+        },
+        {
+          "front": "مَعْنًى — مَعَانٍ",
+          "back": "Anlam"
+        },
+        {
+          "front": "وَجْهٌ — وُجُوهٌ",
+          "back": "Yön, çözüm biçimi"
+        },
+        {
+          "front": "مَرْحَلَةٌ — مَرَاحِلُ",
+          "back": "Aşama"
+        },
+        {
+          "front": "مُرَجِّحٌ — مُرَجِّحَاتٌ",
+          "back": "Bir görüşü üstün kılan gerekçe"
+        },
+        {
+          "front": "دَلَالَةٌ — دَلَالَاتٌ",
+          "back": "İşaret, gösterge"
+        },
+        {
+          "front": "تَصْرِيحٌ — تَصْرِيحَاتٌ",
+          "back": "Açıkça belirtme"
+        },
+        {
+          "front": "رَاجِحٌ",
+          "back": "Delil bakımından üstün gelen"
+        },
+        {
+          "front": "سَلِمَ مِنْ — يَسْلَمُ مِنْ",
+          "back": "Bir şeyden uzak ve korunmuş oldu"
+        },
+        {
+          "front": "تَعَارَضَ — يَتَعَارَضُ",
+          "back": "Birbiriyle çatıştı"
+        },
+        {
+          "front": "نَاقَضَ — يُنَاقِضُ",
+          "back": "Çelişti"
+        },
+        {
+          "front": "أَمْكَنَ — يُمْكِنُ",
+          "back": "Mümkün oldu"
+        },
+        {
+          "front": "جَمَعَ بَيْنَ — يَجْمَعُ بَيْنَ",
+          "back": "İkisinin arasını uzlaştırdı"
+        },
+        {
+          "front": "وَفَّقَ بَيْنَ — يُوَفِّقُ بَيْنَ",
+          "back": "İki şeyi bağdaştırdı"
+        },
+        {
+          "front": "تَعَيَّنَ — يَتَعَيَّنُ",
+          "back": "Zorunlu ve belirli hâle geldi"
+        },
+        {
+          "front": "تَعَذَّرَ — يَتَعَذَّرُ",
+          "back": "Mümkün olmadı, güçleşti"
+        },
+        {
+          "front": "رَجَّحَ — يُرَجِّحُ",
+          "back": "Birini diğerine üstün tuttu"
+        },
+        {
+          "front": "عَمِلَ بِـ — يَعْمَلُ بِـ",
+          "back": "Bir hükme göre hareket etti"
+        },
+        {
+          "front": "تَوَقَّفَ عَنْ — يَتَوَقَّفُ عَنْ",
+          "back": "Hüküm vermeyi veya uygulamayı erteledi"
+        },
+        {
+          "front": "ظَهَرَ — يَظْهَرُ",
+          "back": "Ortaya çıktı"
+        },
+        {
+          "front": "رَفَعَ — يَرْفَعُ",
+          "back": "Hükmü kaldırdı"
+        },
+        {
+          "front": "نَسَخَ — يَنْسَخُ",
+          "back": "Önceki hükmü yürürlükten kaldırdı"
+        },
+        {
+          "front": "أَزَالَ — يُزِيلُ",
+          "back": "Ortadan kaldırdı"
+        },
+        {
+          "front": "نَقَلَ — يَنْقُلُ",
+          "back": "Bir yerden başka yere aktardı"
+        },
+        {
+          "front": "دَلَّ عَلَى — يَدُلُّ عَلَى",
+          "back": "Bir şeye işaret etti"
+        }
+      ]
+    },
+    {
+      "id": "senedde-kopukluk",
+      "titleTr": "Senedde Kopukluk Sebebiyle Reddedilen Hadisler",
+      "titleAr": "الْمَرْدُودُ بِسَبَبِ سَقْطٍ فِي الْإِسْنَادِ",
+      "words": [
+        {
+          "front": "سَقْطٌ",
+          "back": "Senedden râvi düşmesi, kopukluk"
+        },
+        {
+          "front": "اِنْقِطَاعٌ",
+          "back": "Kesilme, bağlantının kopması"
+        },
+        {
+          "front": "وَاسِطَةٌ — وَسَائِطُ",
+          "back": "Aracı râvi"
+        },
+        {
+          "front": "مَبْدَأٌ — مَبَادِئُ",
+          "back": "Başlangıç"
+        },
+        {
+          "front": "طَرَفٌ — أَطْرَافٌ",
+          "back": "Uç, taraf"
+        },
+        {
+          "front": "وَسَطٌ — أَوْسَاطٌ",
+          "back": "Orta kısım"
+        },
+        {
+          "front": "شَيْخٌ — شُيُوخٌ",
+          "back": "Hoca"
+        },
+        {
+          "front": "لِقَاءٌ — لِقَاءَاتٌ",
+          "back": "Görüşme, karşılaşma"
+        },
+        {
+          "front": "مُعَاصَرَةٌ",
+          "back": "Aynı dönemde yaşamış olma"
+        },
+        {
+          "front": "سَمَاعٌ",
+          "back": "Doğrudan işiterek hadis alma"
+        },
+        {
+          "front": "لَفْظٌ — أَلْفَاظٌ",
+          "back": "Sözcük, ifade"
+        },
+        {
+          "front": "صِيغَةٌ — صِيَغٌ",
+          "back": "İfade kalıbı"
+        },
+        {
+          "front": "تَصْرِيحٌ — تَصْرِيحَاتٌ",
+          "back": "Açıkça belirtme"
+        },
+        {
+          "front": "الرَّاوِي الْمَحْذُوفُ — الرُّوَاةُ الْمَحْذُوفُونَ",
+          "back": "Senedden çıkarılmış râvi"
+        },
+        {
+          "front": "ظَاهِرٌ — خَفِيٌّ",
+          "back": "Açıkça görülen"
+        },
+        {
+          "front": "سَقَطَ — يَسْقُطُ",
+          "back": "Düştü, senedden eksildi"
+        },
+        {
+          "front": "أَسْقَطَ — يُسْقِطُ",
+          "back": "Senedden düşürdü"
+        },
+        {
+          "front": "حَذَفَ — يَحْذِفُ",
+          "back": "Çıkardı, sildi"
+        },
+        {
+          "front": "اِنْقَطَعَ — يَنْقَطِعُ",
+          "back": "Bağlantısı kesildi"
+        },
+        {
+          "front": "أَرْسَلَ — يُرْسِلُ",
+          "back": "Aradaki râviyi zikretmeden rivayet etti"
+        },
+        {
+          "front": "لَقِيَ — يَلْقَى",
+          "back": "Görüştü, karşılaştı"
+        },
+        {
+          "front": "عَاصَرَ — يُعَاصِرُ",
+          "back": "Aynı dönemde yaşadı"
+        },
+        {
+          "front": "سَمِعَ — يَسْمَعُ",
+          "back": "İşitti, doğrudan hadis aldı"
+        },
+        {
+          "front": "صَرَّحَ — يُصَرِّحُ",
+          "back": "Açıkça belirtti"
+        },
+        {
+          "front": "دَلَّسَ — يُدَلِّسُ",
+          "back": "Rivayette gizleme yaptı"
+        },
+        {
+          "front": "اِحْتَمَلَ — يَحْتَمِلُ",
+          "back": "Birden fazla anlama elverişli oldu"
+        },
+        {
+          "front": "أَوْهَمَ — يُوهِمُ",
+          "back": "Gerçekte olmayan bir izlenim verdi"
+        },
+        {
+          "front": "أَدْرَكَ — يُدْرِكُ",
+          "back": "Fark etti, tespit etti"
+        },
+        {
+          "front": "عَلَى التَّوَالِي",
+          "back": "Arka arkaya, peş peşe"
+        }
+      ]
+    },
+    {
+      "id": "raviye-elestiri",
+      "titleTr": "Râviye Yönelik Eleştiri Sebebiyle Reddedilen Hadisler",
+      "titleAr": "الْمَرْدُودُ بِسَبَبِ الطَّعْنِ فِي الرَّاوِي",
+      "words": [
+        {
+          "front": "طَعْنٌ — طُعُونٌ",
+          "back": "Güvenilirliğe yönelik eleştiri"
+        },
+        {
+          "front": "تُهْمَةٌ — تُهَمٌ",
+          "back": "Suçlama, zan"
+        },
+        {
+          "front": "كَذِبٌ",
+          "back": "Yalan söyleme"
+        },
+        {
+          "front": "فِسْقٌ",
+          "back": "Dinen açık günahkârlık"
+        },
+        {
+          "front": "غَفْلَةٌ — غَفَلَاتٌ",
+          "back": "Dikkatsizlik, dalgınlık"
+        },
+        {
+          "front": "وَهْمٌ — أَوْهَامٌ",
+          "back": "Yanılma, yanlış hatırlama"
+        },
+        {
+          "front": "جَهَالَةٌ",
+          "back": "Râvinin kimliğinin veya durumunun bilinmemesi"
+        },
+        {
+          "front": "بِدْعَةٌ — بِدَعٌ",
+          "back": "Dinde sonradan ortaya çıkarılan inanç veya uygulama"
+        },
+        {
+          "front": "قَرِينَةٌ — قَرَائِنُ",
+          "back": "Bir sonuca işaret eden belirti"
+        },
+        {
+          "front": "إِقْرَارٌ — إِقْرَارَاتٌ",
+          "back": "İtiraf, kabul etme"
+        },
+        {
+          "front": "سِيَاقٌ — سِيَاقَاتٌ",
+          "back": "Sözün veya senedin akışı"
+        },
+        {
+          "front": "زِيَادَةٌ — زِيَادَاتٌ",
+          "back": "Eklenen unsur"
+        },
+        {
+          "front": "اِخْتِلَاطٌ",
+          "back": "Râvinin hafızasının sonradan karışması"
+        },
+        {
+          "front": "عَيْنٌ — أَعْيَانٌ",
+          "back": "Kişinin kendisi, kimliği"
+        },
+        {
+          "front": "لَقَبٌ — أَلْقَابٌ",
+          "back": "Lakap"
+        },
+        {
+          "front": "كُنْيَةٌ — كُنًى",
+          "back": "Künye"
+        },
+        {
+          "front": "نِسْبَةٌ — نِسَبٌ",
+          "back": "Bir yere, aileye veya gruba aidiyet bildiren ad"
+        },
+        {
+          "front": "فُحْشُ الْغَلَطِ",
+          "back": "Hataların aşırı ve ağır olması"
+        },
+        {
+          "front": "سُوءُ الْحِفْظِ",
+          "back": "Hafızanın zayıf olması"
+        },
+        {
+          "front": "كَثْرَةُ الْأَوْهَامِ",
+          "back": "Çokça yanılma ve yanlış hatırlama"
+        },
+        {
+          "front": "مُخَالَفَةُ الثِّقَاتِ",
+          "back": "Güvenilir râvilerin rivayetine aykırı davranma"
+        },
+        {
+          "front": "طَعَنَ — يَطْعَنُ",
+          "back": "Eleştirdi, güvenilirliğini zedeledi"
+        },
+        {
+          "front": "اِتَّهَمَ — يَتَّهِمُ",
+          "back": "Suçladı, itham etti"
+        },
+        {
+          "front": "كَذَبَ — يَكْذِبُ",
+          "back": "Yalan söyledi"
+        },
+        {
+          "front": "اِخْتَلَقَ — يَخْتَلِقُ",
+          "back": "Uydurdu"
+        },
+        {
+          "front": "نَسَبَ — يَنْسِبُ",
+          "back": "Birine nispet etti"
+        },
+        {
+          "front": "أَقَرَّ — يُقِرُّ",
+          "back": "İtiraf etti, kabul etti"
+        },
+        {
+          "front": "خَالَفَ — يُخَالِفُ",
+          "back": "Aykırı davrandı"
+        },
+        {
+          "front": "وَهِمَ — يَهِمُ",
+          "back": "Yanıldı, yanlış hatırladı"
+        },
+        {
+          "front": "أَدْرَجَ — يُدْرِجُ",
+          "back": "Rivayete dışarıdan söz ekledi"
+        },
+        {
+          "front": "قَلَبَ — يَقْلِبُ",
+          "back": "Yerini veya sırasını değiştirdi"
+        },
+        {
+          "front": "أَبْدَلَ — يُبْدِلُ",
+          "back": "Bir şeyi başkasıyla değiştirdi"
+        },
+        {
+          "front": "قَدَّمَ — يُقَدِّمُ",
+          "back": "Öne aldı"
+        },
+        {
+          "front": "أَخَّرَ — يُؤَخِّرُ",
+          "back": "Geriye aldı"
+        },
+        {
+          "front": "اِضْطَرَبَ — يَضْطَرِبُ",
+          "back": "Tutarsız biçimlerde rivayet edildi"
+        },
+        {
+          "front": "صَحَّفَ — يُصَحِّفُ",
+          "back": "Yazıyı veya kelimeyi yanlış okudu"
+        },
+        {
+          "front": "اِخْتَلَطَ — يَخْتَلِطُ",
+          "back": "Hafızası karıştı"
+        },
+        {
+          "front": "تَمَيَّزَ — يَتَمَيَّزُ",
+          "back": "Ayırt edildi"
+        },
+        {
+          "front": "قَدَحَ — يَقْدَحُ",
+          "back": "Rivayetin sıhhatine zarar verdi"
+        },
+        {
+          "front": "اِعْتَقَدَ — يَعْتَقِدُ",
+          "back": "İnandı, benimsedi"
+        }
+      ]
+    },
+    {
+      "id": "nispet-tasnifi",
+      "titleTr": "Hadisin Nispet Edildiği Kişiye Göre Tasnifi",
+      "titleAr": "تَقْسِيمُ الْخَبَرِ بِحَسَبِ مَنْ أُسْنِدَ إِلَيْهِ",
+      "words": [
+        {
+          "front": "صِيغَةٌ — صِيَغٌ",
+          "back": "İfade kalıbı"
+        },
+        {
+          "front": "حَضْرَةٌ",
+          "back": "Birinin huzuru, bulunduğu yer"
+        },
+        {
+          "front": "إِنْكَارٌ — إِنْكَارَاتٌ",
+          "back": "Karşı çıkma, onaylamama"
+        },
+        {
+          "front": "مَجَالٌ — مَجَالَاتٌ",
+          "back": "İmkân ve değerlendirme alanı"
+        },
+        {
+          "front": "عَهْدٌ — عُهُودٌ",
+          "back": "Dönem, devir"
+        },
+        {
+          "front": "قَرِينَةٌ — قَرَائِنُ",
+          "back": "Bir hükme işaret eden ipucu"
+        },
+        {
+          "front": "قَائِلٌ — قَائِلُونَ",
+          "back": "Söyleyen kişi"
+        },
+        {
+          "front": "مَظِنَّةٌ — مَظَانُّ",
+          "back": "Bir şeyin genellikle bulunduğu yer veya kaynak"
+        },
+        {
+          "front": "تَجَوُّزٌ",
+          "back": "Bir terimi asıl anlamından daha geniş veya gevşek kullanma"
+        },
+        {
+          "front": "أَسْنَدَ — يُسْنِدُ",
+          "back": "Rivayeti bir kişiye dayandırdı"
+        },
+        {
+          "front": "أَضَافَ — يُضِيفُ",
+          "back": "Bir söz veya fiili birine ait gösterdi"
+        },
+        {
+          "front": "نَسَبَ — يَنْسِبُ",
+          "back": "Birine nispet etti"
+        },
+        {
+          "front": "ثَبَتَ — يَثْبُتُ",
+          "back": "Güvenilir biçimde sabit oldu"
+        },
+        {
+          "front": "رَفَعَ — يَرْفَعُ",
+          "back": "Yükseltti"
+        },
+        {
+          "front": "وَقَفَ — يَقِفُ",
+          "back": "Durdu, bir noktada kaldı"
+        },
+        {
+          "front": "قَطَعَ — يَقْطَعُ",
+          "back": "Kesti"
+        },
+        {
+          "front": "أَنْكَرَ — يُنْكِرُ",
+          "back": "Karşı çıktı, onaylamadı"
+        },
+        {
+          "front": "دَلَّ — يَدُلُّ",
+          "back": "İşaret etti"
+        },
+        {
+          "front": "اِحْتَجَّ — يَحْتَجُّ",
+          "back": "Delil olarak kullandı"
+        },
+        {
+          "front": "صَحَّ — يَصِحُّ",
+          "back": "Doğru ve geçerli oldu"
+        },
+        {
+          "front": "وَجَبَ — يَجِبُ",
+          "back": "Gerekli oldu"
+        },
+        {
+          "front": "مَنْ دُونِهِ",
+          "back": "Ondan sonraki veya daha alt tabakadaki kişiler"
+        },
+        {
+          "front": "لَا مَجَالَ لِلِاجْتِهَادِ فِيهِ",
+          "back": "Kişisel çıkarım ve içtihada açık değildir"
+        },
+        {
+          "front": "يُتَعَبَّدُ بِتِلَاوَتِهِ",
+          "back": "Okunması başlı başına ibadet sayılır"
+        }
+      ]
+    },
+    {
+      "id": "makbul-ve-merdut",
+      "titleTr": "Makbul ve Merdut Arasındaki Ortak Hadis Türleri",
+      "titleAr": "الْأَنْوَاعُ الْمُشْتَرَكَةُ بَيْنَ الْمَقْبُولِ وَالْمَرْدُودِ",
+      "words": [
+        {
+          "front": "زِيَادَةٌ — زِيَادَاتٌ",
+          "back": "İlave"
+        },
+        {
+          "front": "لَفْظٌ — أَلْفَاظٌ",
+          "back": "İfade, lafız"
+        },
+        {
+          "front": "مُنَافَاةٌ",
+          "back": "Bağdaşmama, aykırılık"
+        },
+        {
+          "front": "تَعَارُضٌ",
+          "back": "Birbiriyle çatışma"
+        },
+        {
+          "front": "مُوَافَقَةٌ",
+          "back": "Uyuşma, aynı yönde olma"
+        },
+        {
+          "front": "مُشَارَكَةٌ",
+          "back": "Ortak olma, aynı rivayete katılma"
+        },
+        {
+          "front": "بَحْثٌ — بُحُوثٌ",
+          "back": "Araştırma"
+        },
+        {
+          "front": "تَفْتِيشٌ",
+          "back": "Araştırıp tarama"
+        },
+        {
+          "front": "هَدَفٌ — أَهْدَافٌ",
+          "back": "Amaç"
+        },
+        {
+          "front": "مُنْتَهًى",
+          "back": "Son nokta, ulaşılan son yer"
+        },
+        {
+          "front": "قَسِيمٌ",
+          "back": "Aynı düzeyde bulunan ayrı bir kategori"
+        },
+        {
+          "front": "تَامٌّ",
+          "back": "Tam, eksiksiz"
+        },
+        {
+          "front": "قَاصِرٌ",
+          "back": "Sınırlı, yalnızca bir kısmı kapsayan"
+        },
+        {
+          "front": "اِتَّصَلَ — يَتَّصِلُ",
+          "back": "Kesintisiz biçimde bağlandı"
+        },
+        {
+          "front": "تَتَبَّعَ — يَتَتَبَّعُ",
+          "back": "İzini sürerek araştırdı"
+        },
+        {
+          "front": "قَبِلَ — يَقْبَلُ",
+          "back": "Kabul etti"
+        },
+        {
+          "front": "رَدَّ — يَرُدُّ",
+          "back": "Reddetti"
+        },
+        {
+          "front": "رَفَعَ — يَرْفَعُ",
+          "back": "Bir rivayeti Hz. Peygamber’e nispet etti"
+        },
+        {
+          "front": "وَصَلَ — يَصِلُ",
+          "back": "Kopuk görünen senedi bağladı"
+        },
+        {
+          "front": "أَرْسَلَ — يُرْسِلُ",
+          "back": "Rivayeti mürsel olarak aktardı"
+        },
+        {
+          "front": "اِنْفَرَدَ — يَنْفَرِدُ",
+          "back": "Rivayette tek kaldı"
+        },
+        {
+          "front": "اِعْتَبَرَ — يَعْتَبِرُ",
+          "back": "Rivayetin diğer yollarını araştırdı"
+        },
+        {
+          "front": "وَافَقَ — يُوَافِقُ",
+          "back": "Uyuştu, aynı şekilde rivayet etti"
+        },
+        {
+          "front": "شَارَكَ — يُشَارِكُ",
+          "back": "Ortak oldu, aynı rivayete katıldı"
+        },
+        {
+          "front": "شَهِدَ — يَشْهَدُ",
+          "back": "Destekledi, doğruluğuna işaret etti"
+        },
+        {
+          "front": "قَوَّى — يُقَوِّي",
+          "back": "Güçlendirdi"
+        },
+        {
+          "front": "تَوَصَّلَ إِلَى — يَتَوَصَّلُ إِلَى",
+          "back": "Bir sonuca ulaştı"
+        },
+        {
+          "front": "اِتَّحَدَ — يَتَّحِدُ",
+          "back": "Aynı oldu, birleşti"
+        },
+        {
+          "front": "اِخْتَلَفَ — يَخْتَلِفُ",
+          "back": "Farklı oldu"
+        }
+      ]
+    },
+    {
+      "id": "ravi-ve-cerh",
+      "titleTr": "Râvi ve Cerh-Ta‘dîl",
+      "titleAr": "الرَّاوِي وَالْجَرْحُ وَالتَّعْدِيلُ",
+      "words": [
+        {
+          "front": "رَكِيزَةٌ — رَكَائِزُ",
+          "back": "Temel dayanak"
+        },
+        {
+          "front": "مَجْهُولٌ — مَجْهُولُونَ",
+          "back": "Kim olduğu veya durumu bilinmeyen"
+        },
+        {
+          "front": "بَالِغٌ — بَالِغُونَ",
+          "back": "Ergenlik çağına ulaşmış kişi"
+        },
+        {
+          "front": "عَاقِلٌ — عُقَلَاءُ",
+          "back": "Akıl sahibi"
+        },
+        {
+          "front": "سَلِيمٌ — سَالِمُونَ",
+          "back": "Bir kusurdan uzak olan"
+        },
+        {
+          "front": "خَارِمٌ — خَوَارِمُ",
+          "back": "Bir niteliği zedeleyen davranış"
+        },
+        {
+          "front": "مُرُوءَةٌ",
+          "back": "Kişinin toplum içindeki saygınlığını koruyan düzgün davranış"
+        },
+        {
+          "front": "ثَنَاءٌ",
+          "back": "Övgü, olumlu biçimde anma"
+        },
+        {
+          "front": "مُتْقِنٌ — مُتْقِنُونَ",
+          "back": "İşini sağlam ve hatasız yapan"
+        },
+        {
+          "front": "مُخَالَفَةٌ — مُخَالَفَاتٌ",
+          "back": "Aykırılık"
+        },
+        {
+          "front": "سَبَبٌ — أَسْبَابٌ",
+          "back": "Sebep"
+        },
+        {
+          "front": "مُفَسَّرٌ",
+          "back": "Sebebi açıklanmış"
+        },
+        {
+          "front": "جَارِحٌ — جَارِحُونَ",
+          "back": "Râviyi güvenilmez saymaya yol açan"
+        },
+        {
+          "front": "مُعَدِّلٌ — مُعَدِّلُونَ",
+          "back": "Râvinin güvenilirliğine hükmeden âlim"
+        },
+        {
+          "front": "مُتَعَصِّبٌ — مُتَعَصِّبُونَ",
+          "back": "Tarafgir, önyargılı"
+        },
+        {
+          "front": "تَرْجَمَةٌ — تَرَاجِمُ",
+          "back": "Bir kişinin hayatını ve ilmî durumunu anlatan biyografi"
+        },
+        {
+          "front": "تَسَاهُلٌ",
+          "back": "Gereken titizliği göstermeme"
+        },
+        {
+          "front": "تَلْقِينٌ",
+          "back": "Bir sözü râviye söyleyerek ona aitmiş gibi kabul ettirme"
+        },
+        {
+          "front": "سَهْوٌ — أَسْهَاءٌ",
+          "back": "Dalgınlık sonucu unutma veya hata"
+        },
+        {
+          "front": "أَجْرٌ — أُجُورٌ",
+          "back": "Ücret"
+        },
+        {
+          "front": "وَثِقَ بِـ — يَثِقُ بِـ",
+          "back": "Güvendi"
+        },
+        {
+          "front": "رَكَنَ إِلَى — يَرْكَنُ إِلَى",
+          "back": "Güvenip dayandı"
+        },
+        {
+          "front": "نَصَّ عَلَى — يَنُصُّ عَلَى",
+          "back": "Açıkça belirtti"
+        },
+        {
+          "front": "شَاعَ — يَشِيعُ",
+          "back": "Yaygınlaştı"
+        },
+        {
+          "front": "كَفَى — يَكْفِي",
+          "back": "Yeterli oldu"
+        },
+        {
+          "front": "وَافَقَ — يُوَافِقُ",
+          "back": "Uyum gösterdi"
+        },
+        {
+          "front": "خَالَفَ — يُخَالِفُ",
+          "back": "Aykırı davrandı"
+        },
+        {
+          "front": "حَصَرَ — يَحْصُرُ",
+          "back": "Sınırlandırdı, sayıp belirledi"
+        },
+        {
+          "front": "اِرْتَكَبَ — يَرْتَكِبُ",
+          "back": "Bir hata veya yasak işledi"
+        },
+        {
+          "front": "قَدَّمَ — يُقَدِّمُ",
+          "back": "Birini diğerine tercih etti"
+        },
+        {
+          "front": "تَابَ — يَتُوبُ",
+          "back": "Tövbe etti"
+        },
+        {
+          "front": "اِمْتَنَعَ — يَمْتَنِعُ",
+          "back": "Kaçındı veya yapamaz hâle geldi"
+        }
+      ]
+    },
+    {
+      "id": "hadisin-alinmasi",
+      "titleTr": "Hadisin Alınması, Aktarılması ve Rivayet Âdâbı",
+      "titleAr": "تَحَمُّلُ الْحَدِيثِ وَأَدَاؤُهُ وَآدَابُ رِوَايَتِهِ",
+      "words": [
+        {
+          "front": "طَالِبٌ — طُلَّابٌ",
+          "back": "Öğrenci"
+        },
+        {
+          "front": "عِبَارَةٌ — عِبَارَاتٌ",
+          "back": "İfade"
+        },
+        {
+          "front": "صِيغَةٌ — صِيَغٌ",
+          "back": "Kullanım kalıbı"
+        },
+        {
+          "front": "نُسْخَةٌ — نُسَخٌ",
+          "back": "Yazma veya kitap nüshası"
+        },
+        {
+          "front": "مَقْصِدٌ — مَقَاصِدُ",
+          "back": "Kastedilen anlam, amaç"
+        },
+        {
+          "front": "ضَرُورَةٌ — ضَرُورَاتٌ",
+          "back": "Zorunluluk"
+        },
+        {
+          "front": "خَطَأٌ — أَخْطَاءٌ",
+          "back": "Yanlış, hata"
+        },
+        {
+          "front": "تَغْيِيرٌ — تَغْيِيرَاتٌ",
+          "back": "Değiştirme"
+        },
+        {
+          "front": "نِيَّةٌ — نِيَّاتٌ",
+          "back": "Niyet"
+        },
+        {
+          "front": "غَرَضٌ — أَغْرَاضٌ",
+          "back": "Amaç, kişisel çıkar"
+        },
+        {
+          "front": "قُرْبَةٌ — قُرُبَاتٌ",
+          "back": "Allah’a yaklaştıran ibadet"
+        },
+        {
+          "front": "خُلُقٌ — أَخْلَاقٌ",
+          "back": "Ahlâk ve karakter özelliği"
+        },
+        {
+          "front": "هَمٌّ — هُمُومٌ",
+          "back": "Önem verilen şey, temel kaygı"
+        },
+        {
+          "front": "شُهْرَةٌ",
+          "back": "Tanınmışlık, şöhret"
+        },
+        {
+          "front": "رِئَاسَةٌ",
+          "back": "Makam ve üstünlük isteği"
+        },
+        {
+          "front": "تَمْيِيزٌ",
+          "back": "Anlama ve ayırt etme yeteneği"
+        },
+        {
+          "front": "تَلَقَّى — يَتَلَقَّى",
+          "back": "Hocadan alıp öğrendi"
+        },
+        {
+          "front": "أَدَّى — يُؤَدِّي",
+          "back": "Aldığı rivayeti başkasına aktardı"
+        },
+        {
+          "front": "أَمْسَكَ — يُمْسِكُ",
+          "back": "Elinde tuttu, takip etti"
+        },
+        {
+          "front": "خَصَّصَ — يُخَصِّصُ",
+          "back": "Belirli bir kullanıma ayırdı"
+        },
+        {
+          "front": "اِسْتَعَانَ — يَسْتَعِينُ",
+          "back": "Birinden yardım aldı"
+        },
+        {
+          "front": "اِحْتَاطَ — يَحْتَاطُ",
+          "back": "Tedbirli davrandı"
+        },
+        {
+          "front": "غَابَ — يَغِيبُ",
+          "back": "Yanında bulunmadı, kayboldu"
+        },
+        {
+          "front": "مَنَعَ — يَمْنَعُ",
+          "back": "Yasakladı, izin vermedi"
+        },
+        {
+          "front": "أَجَازَ — يُجِيزُ",
+          "back": "İzin verdi, câiz gördü"
+        },
+        {
+          "front": "غَيَّرَ — يُغَيِّرُ",
+          "back": "Değiştirdi"
+        },
+        {
+          "front": "تَعَلَّمَ — يَتَعَلَّمُ",
+          "back": "Öğrendi"
+        },
+        {
+          "front": "تَثَبَّتَ — يَتَثَبَّتُ",
+          "back": "Doğruluğunu dikkatle araştırdı"
+        },
+        {
+          "front": "أَخْلَصَ — يُخْلِصُ",
+          "back": "Niyetini samimi kıldı"
+        },
+        {
+          "front": "طَهَّرَ — يُطَهِّرُ",
+          "back": "Arındırdı, temizledi"
+        },
+        {
+          "front": "نَشَرَ — يَنْشُرُ",
+          "back": "Yaydı"
+        },
+        {
+          "front": "بَلَّغَ — يُبَلِّغُ",
+          "back": "Ulaştırdı, tebliğ etti"
+        },
+        {
+          "front": "أَرْشَدَ — يُرْشِدُ",
+          "back": "Doğru yere yönlendirdi"
+        },
+        {
+          "front": "تَحَلَّى — يَتَحَلَّى",
+          "back": "Güzel bir özellikle donandı"
+        },
+        {
+          "front": "قَابَلَ — يُقَابِلُ",
+          "back": "İki nüshayı karşılaştırdı"
+        },
+        {
+          "front": "اِشْتَغَلَ — يَشْتَغِلُ",
+          "back": "Bir ilimle meşgul oldu"
+        }
+      ]
+    },
+    {
+      "id": "isnad-incelikleri",
+      "titleTr": "İsnadın İncelikleri",
+      "titleAr": "لَطَائِفُ الْإِسْنَادِ",
+      "words": [
+        {
+          "front": "قُرْبٌ",
+          "back": "Yakınlık"
+        },
+        {
+          "front": "رِحْلَةٌ — رِحْلَاتٌ",
+          "back": "Yolculuk"
+        },
+        {
+          "front": "عَدَدٌ — أَعْدَادٌ",
+          "back": "Sayı"
+        },
+        {
+          "front": "وَاسِطَةٌ — وَسَائِطُ",
+          "back": "Aracı, aradaki kişi"
+        },
+        {
+          "front": "وَفَاةٌ — وَفَيَاتٌ",
+          "back": "Ölüm"
+        },
+        {
+          "front": "خَلَلٌ",
+          "back": "Kusur, bozukluk"
+        },
+        {
+          "front": "سِلْسِلَةٌ — سَلَاسِلُ",
+          "back": "Zincir"
+        },
+        {
+          "front": "صِفَةٌ — صِفَاتٌ",
+          "back": "Nitelik, özellik"
+        },
+        {
+          "front": "حَالَةٌ — حَالَاتٌ",
+          "back": "Durum"
+        },
+        {
+          "front": "اِشْتِرَاكٌ",
+          "back": "Ortak olma, birlikte bulunma"
+        },
+        {
+          "front": "سِنٌّ",
+          "back": "Yaş"
+        },
+        {
+          "front": "قَدْرٌ",
+          "back": "Değer, derece, ilmî konum"
+        },
+        {
+          "front": "تَوَاضُعٌ",
+          "back": "Alçakgönüllülük"
+        },
+        {
+          "front": "فَرْقٌ — فُرُوقٌ",
+          "back": "Fark"
+        },
+        {
+          "front": "تِلْمِيذٌ — تَلَامِيذُ",
+          "back": "Öğrenci"
+        },
+        {
+          "front": "جَدٌّ — أَجْدَادٌ",
+          "back": "Dede"
+        },
+        {
+          "front": "زَمَانٌ — أَزْمِنَةٌ",
+          "back": "Zaman"
+        },
+        {
+          "front": "رَحَلَ — يَرْحَلُ",
+          "back": "Yolculuk yaptı"
+        },
+        {
+          "front": "كَثُرَ — يَكْثُرُ",
+          "back": "Çoğaldı, çok oldu"
+        },
+        {
+          "front": "تَقَدَّمَ — يَتَقَدَّمُ",
+          "back": "Önce gerçekleşti, öne geçti"
+        },
+        {
+          "front": "تَسَاوَى — يَتَسَاوَى",
+          "back": "Eşit oldu"
+        },
+        {
+          "front": "تَلَاقَى — يَتَلَاقَى",
+          "back": "Karşılaştı"
+        },
+        {
+          "front": "تَوَالَى — يَتَوَالَى",
+          "back": "Peş peşe devam etti"
+        },
+        {
+          "front": "اِشْتَرَكَ — يَشْتَرِكُ",
+          "back": "Ortak oldu"
+        },
+        {
+          "front": "تَمَاثَلَ — يَتَمَاثَلُ",
+          "back": "Benzer oldu"
+        },
+        {
+          "front": "ظَنَّ — يَظُنُّ",
+          "back": "Zannetti"
+        },
+        {
+          "front": "اِنْقَلَبَ — يَنْقَلِبُ",
+          "back": "Tersine döndü, yer değiştirdi"
+        },
+        {
+          "front": "تَبَاعَدَ — يَتَبَاعَدُ",
+          "back": "Birbirinden uzaklaştı"
+        },
+        {
+          "front": "سَبَقَ — يَسْبِقُ",
+          "back": "Önce geldi"
+        },
+        {
+          "front": "لَحِقَ — يَلْحَقُ",
+          "back": "Ardından geldi, yetişti"
+        }
+      ]
+    },
+    {
+      "id": "ravi-taninmasi",
+      "titleTr": "Râvilerin Tanınması",
+      "titleAr": "مَعْرِفَةُ الرُّوَاةِ",
+      "words": [
+        {
+          "front": "صُحْبَةٌ",
+          "back": "Birlikte bulunma; Hz. Peygamber’le görüşmüş olma"
+        },
+        {
+          "front": "رِدَّةٌ",
+          "back": "İslam’dan dönme"
+        },
+        {
+          "front": "شُهْرَةٌ",
+          "back": "Yaygın biçimde tanınma"
+        },
+        {
+          "front": "إِخْبَارٌ — إِخْبَارَاتٌ",
+          "back": "Haber verme, bir kişinin durumunu bildirme"
+        },
+        {
+          "front": "جَاهِلِيَّةٌ",
+          "back": "İslam’dan önceki Cahiliye dönemi"
+        },
+        {
+          "front": "قَرْنٌ — قُرُونٌ",
+          "back": "Nesil, dönem"
+        },
+        {
+          "front": "عَصْرٌ — عُصُورٌ",
+          "back": "Devir"
+        },
+        {
+          "front": "اِشْتِرَاكٌ",
+          "back": "Bir isim veya özellikte ortaklık"
+        },
+        {
+          "front": "اِلْتِبَاسٌ",
+          "back": "Birbirine karışma, ayırt edilememe"
+        },
+        {
+          "front": "خَطٌّ — خُطُوطٌ",
+          "back": "Yazılış biçimi"
+        },
+        {
+          "front": "نُطْقٌ",
+          "back": "Söyleyiş, telaffuz"
+        },
+        {
+          "front": "إِهْمَالٌ",
+          "back": "Kişiyi ayıran açıklayıcı bilginin belirtilmemesi"
+        },
+        {
+          "front": "مُفْرَدَةٌ — مُفْرَدَاتٌ",
+          "back": "Başkasında bulunmayan tek ve nadir ad"
+        },
+        {
+          "front": "عَارِضٌ — عَوَارِضُ",
+          "back": "Sonradan ortaya çıkan geçici sebep"
+        },
+        {
+          "front": "قَبِيلَةٌ — قَبَائِلُ",
+          "back": "Kabile"
+        },
+        {
+          "front": "صَنْعَةٌ — صَنَائِعُ",
+          "back": "Meslek, zanaat"
+        },
+        {
+          "front": "مَوْلِدٌ — مَوَالِيدُ",
+          "back": "Doğum tarihi veya yeri"
+        },
+        {
+          "front": "وَطَنٌ — أَوْطَانٌ",
+          "back": "Yaşanılan veya mensup olunan yer"
+        },
+        {
+          "front": "اِتَّفَقَ — يَتَّفِقُ",
+          "back": "Aynı oldu, uyuştu"
+        },
+        {
+          "front": "اِفْتَرَقَ — يَفْتَرِقُ",
+          "back": "Birbirinden ayrıldı"
+        },
+        {
+          "front": "اِئْتَلَفَ — يَأْتَلِفُ",
+          "back": "Birleşti, yazılışı aynı oldu"
+        },
+        {
+          "front": "اِخْتَلَفَ — يَخْتَلِفُ",
+          "back": "Farklı oldu"
+        },
+        {
+          "front": "اِشْتَبَهَ — يَشْتَبِهُ",
+          "back": "Birbirine benzeyip karıştı"
+        },
+        {
+          "front": "أَهْمَلَ — يُهْمِلُ",
+          "back": "Ayırt edici bilgiyi belirtmeden bıraktı"
+        },
+        {
+          "front": "سَمَّى — يُسَمِّي",
+          "back": "İsim verdi, adlandırdı"
+        },
+        {
+          "front": "كَنَّى — يُكَنِّي",
+          "back": "Künye verdi veya künyeyle andı"
+        },
+        {
+          "front": "لَقَّبَ — يُلَقِّبُ",
+          "back": "Lakap verdi"
+        },
+        {
+          "front": "اِنْتَسَبَ — يَنْتَسِبُ",
+          "back": "Bir yere, aileye veya topluluğa nispet edildi"
+        },
+        {
+          "front": "وُلِدَ — يُولَدُ",
+          "back": "Doğdu"
+        },
+        {
+          "front": "تُوُفِّيَ — يُتَوَفَّى",
+          "back": "Vefat etti"
+        },
+        {
+          "front": "هَاجَرَ — يُهَاجِرُ",
+          "back": "Hicret etti, göç etti"
+        },
+        {
+          "front": "اِنْتَقَلَ — يَنْتَقِلُ",
+          "back": "Bir yerden başka yere taşındı"
+        },
+        {
+          "front": "تَقَارَبَ — يَتَقَارَبُ",
+          "back": "Birbirine yakın oldu"
+        },
+        {
+          "front": "تَدَاخَلَ — يَتَدَاخَلُ",
+          "back": "Birbirine karıştı"
+        },
+        {
+          "front": "نَزَلَ — يَنْزِلُ",
+          "back": "Bir yere yerleşti"
+        },
+        {
+          "front": "جَالَسَ — يُجَالِسُ",
+          "back": "Birileriyle oturup beraber bulundu"
+        }
+      ]
+    }
+  ]
+}

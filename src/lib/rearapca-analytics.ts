@@ -165,7 +165,7 @@ function bucketIndexForEvent(
   const key =
     range === "all"
       ? monthKey(date)
-      : range === "90"
+      : range === "90" || range === "30"
         ? weekKey(date)
         : dayKey(date);
 
@@ -192,7 +192,7 @@ export function buildRearapcaAnalytics({
     range === "7"
       ? buildDayBuckets(7, now)
       : range === "30"
-        ? buildDayBuckets(30, now)
+        ? buildWeekBuckets(5, now)
         : range === "90"
           ? buildWeekBuckets(13, now)
           : buildMonthBuckets(rearapcaEvents, now);

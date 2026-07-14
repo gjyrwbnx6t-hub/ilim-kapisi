@@ -3,18 +3,86 @@
 import { useCallback, useState } from "react";
 import { Volume2 } from "lucide-react";
 
-/** Ön yüz metnini tarayıcı TTS ile seslendirir (ek bağımlılık yok). */
-export function speakFrontText(
-  text: string,
-  frontDir: "rtl" | "ltr",
-): void {
+function pickVoice(frontDir: "rtl" | "ltr"): SpeechSynthesisVoice | undefined {
+  if (typeof window === "undefined" || !window.speechSynthesis) return undefined;
+
+  const voices = window.speechSynthesis.getVoices();
+  const langPrefix = frontDir === "rtl" ? "ar" : "en";
+  return (
+    voices.find((voice) => voice.lang.startsWith(langPrefix) && voice.localService) ??
+    voices.find((voice) => voice.lang.startsWith(langPrefix)) ??
+    undefined
+  );
+}
+
+function waitForVoices(timeoutMs = 800): Promise<void> {
+  return new Promise((resolve) => {
+    if (typeof window === "undefined" || !window.speechSynthesis) {
+      resolve();
+      return;
+    }
+
+    const synth = window.speechSynthesis;
+    if (synth.getVoices().length > 0) {
+      resolve();
+      return;
+    }
+
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      synth.removeEventListener("voiceschanged", finish);
+      resolve();
+    };
+
+    synth.addEventListener("voiceschanged", finish);
+    window.setTimeout(finish, timeoutMs);
+  });
+}
+
+/** Async yüklemeden önce kullanıcı tıklamasıyla TTS kilidini açar. */
+export function primeSpeechSynthesis(): void {
   if (typeof window === "undefined" || !window.speechSynthesis) return;
 
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text.trim());
-  utterance.lang = frontDir === "rtl" ? "ar-SA" : "en-US";
-  utterance.rate = 0.92;
-  window.speechSynthesis.speak(utterance);
+  const synth = window.speechSynthesis;
+  synth.cancel();
+  if (synth.paused) synth.resume();
+
+  const utterance = new SpeechSynthesisUtterance("\u200b");
+  utterance.volume = 0.01;
+  utterance.rate = 10;
+  synth.speak(utterance);
+}
+
+/** Ön yüz metnini tarayıcı TTS ile seslendirir (ek bağımlılık yok). */
+export function speakFrontText(text: string, frontDir: "rtl" | "ltr"): void {
+  if (typeof window === "undefined" || !window.speechSynthesis) return;
+
+  const trimmed = text.trim();
+  if (!trimmed) return;
+
+  const synth = window.speechSynthesis;
+
+  const doSpeak = () => {
+    synth.cancel();
+    if (synth.paused) synth.resume();
+
+    window.setTimeout(() => {
+      const utterance = new SpeechSynthesisUtterance(trimmed);
+      utterance.lang = frontDir === "rtl" ? "ar-SA" : "en-US";
+      utterance.rate = 0.92;
+      const voice = pickVoice(frontDir);
+      if (voice) utterance.voice = voice;
+      synth.speak(utterance);
+    }, 50);
+  };
+
+  if (synth.getVoices().length === 0) {
+    void waitForVoices().then(doSpeak);
+  } else {
+    doSpeak();
+  }
 }
 
 interface SpeakButtonProps {
@@ -44,16 +112,11 @@ export function SpeakButton({
     (e: React.MouseEvent<HTMLButtonElement>) => {
       if (stopPropagation) e.stopPropagation();
       if (!text.trim()) return;
-      if (typeof window === "undefined" || !window.speechSynthesis) return;
 
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text.trim());
-      utterance.lang = frontDir === "rtl" ? "ar-SA" : "en-US";
-      utterance.rate = 0.92;
-      utterance.onend = () => setSpeaking(false);
-      utterance.onerror = () => setSpeaking(false);
+      primeSpeechSynthesis();
+      speakFrontText(text, frontDir);
       setSpeaking(true);
-      window.speechSynthesis.speak(utterance);
+      window.setTimeout(() => setSpeaking(false), 1200);
     },
     [text, frontDir, stopPropagation],
   );

@@ -8,10 +8,7 @@ import {
   buildProgressSnapshots,
   summarizeRearapcaEvents,
 } from "@/lib/rearapca-progress-events";
-import {
-  DEFAULT_REARAPCA_DAILY_GOAL,
-  buildSessionQueue,
-} from "@/lib/rearapca-srs.mjs";
+import { buildSessionQueue } from "@/lib/rearapca-srs.mjs";
 import { clampDailyGoal } from "@/lib/rearapca-daily-goal";
 
 type SessionMode = "new" | "review" | "mixed";

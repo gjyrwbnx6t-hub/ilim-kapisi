@@ -8,7 +8,7 @@ export function clampDailyGoal(value: unknown): number {
   if (typeof value !== "number" || !Number.isFinite(value)) {
     return DEFAULT_REARAPCA_DAILY_GOAL;
   }
-  return Math.max(1, Math.min(100, Math.round(value)));
+  return Math.max(1, Math.round(value));
 }
 
 export function readDailyGoalFromStorage(): number {

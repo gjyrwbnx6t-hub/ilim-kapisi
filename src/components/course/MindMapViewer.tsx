@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { Maximize2, Minimize2 } from "lucide-react";
 import type { MindMapNode } from "@/lib/types";
 import { logActivity } from "@/lib/activity";
+import { useStudyTimeTracker } from "@/hooks/useStudyTimeTracker";
 
 /**
  * Zihin Şeması Gezgini.
@@ -40,6 +41,12 @@ export default function MindMapViewer({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useStudyTimeTracker({
+    courseSlug,
+    module: "mindmap",
+    moduleLabel: "Zihin Şeması",
+  });
 
   const toggleFullscreen = useCallback(() => {
     const el = containerRef.current;

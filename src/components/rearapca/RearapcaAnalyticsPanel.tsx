@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type {
   AnalyticsRange,
   RearapcaAnalytics,
@@ -47,6 +47,7 @@ function bucketTotal(bucket: RearapcaAnalytics["buckets"][number]) {
 }
 
 export default function RearapcaAnalyticsPanel() {
+  const chartScrollRef = useRef<HTMLDivElement>(null);
   const [range, setRange] = useState<AnalyticsRange>("30");
   const [data, setData] = useState<RearapcaAnalytics>(() =>
     emptyAnalytics("30"),
@@ -82,6 +83,13 @@ export default function RearapcaAnalyticsPanel() {
       alive = false;
     };
   }, [range]);
+
+  useEffect(() => {
+    if (loading) return;
+    const el = chartScrollRef.current;
+    if (!el) return;
+    el.scrollLeft = el.scrollWidth;
+  }, [data.buckets, loading, range]);
 
   const maxTotal = useMemo(
     () => Math.max(1, ...data.buckets.map(bucketTotal)),
@@ -144,7 +152,10 @@ export default function RearapcaAnalyticsPanel() {
               </div>
 
               <div className="relative min-w-0 flex-1">
-                <div className="flex h-56 items-end gap-1 overflow-x-auto pb-1 sm:gap-2">
+                <div
+                  ref={chartScrollRef}
+                  className="flex h-56 items-end gap-1 overflow-x-auto pb-1 sm:gap-2"
+                >
                   {data.buckets.map((bucket) => {
                     const total = bucketTotal(bucket);
                     const barHeightPx =
@@ -159,7 +170,7 @@ export default function RearapcaAnalyticsPanel() {
                     return (
                       <div
                         key={bucket.key}
-                        className="flex min-w-[28px] flex-1 flex-col items-center justify-end sm:min-w-[36px]"
+                        className="flex w-9 shrink-0 flex-col items-center justify-end sm:w-10"
                       >
                         <div
                           className="flex w-full max-w-10 flex-col justify-end overflow-hidden rounded-t-md"
@@ -180,7 +191,7 @@ export default function RearapcaAnalyticsPanel() {
                             </div>
                           ))}
                         </div>
-                        <span className="mt-2 max-w-full truncate text-center text-[10px] text-slate-500">
+                        <span className="mt-2 w-full text-center text-[10px] leading-tight text-slate-500">
                           {bucket.label}
                         </span>
                       </div>

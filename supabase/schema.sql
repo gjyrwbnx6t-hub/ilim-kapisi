@@ -133,6 +133,10 @@ drop policy if exists activity_select_own_or_teacher on public.activity_events;
 create policy activity_select_own_or_teacher on public.activity_events
   for select using (user_id = auth.uid() or public.is_teacher());
 
+drop policy if exists activity_delete_own on public.activity_events;
+create policy activity_delete_own on public.activity_events
+  for delete using (user_id = auth.uid());
+
 -- study_progress: öğrenci kendi ilerlemesini yazar/görür; öğretmen hepsini görür
 drop policy if exists progress_insert_own on public.study_progress;
 create policy progress_insert_own on public.study_progress

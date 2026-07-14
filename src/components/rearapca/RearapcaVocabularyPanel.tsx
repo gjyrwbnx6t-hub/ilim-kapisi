@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Check, ChevronDown, Search, Sparkles, X } from "lucide-react";
+import { Check, ChevronDown, RotateCcw, Search, Sparkles, X } from "lucide-react";
 import { DOMAIN_META, DOMAIN_ORDER } from "@/data/domains";
 import { DOMAIN_ICONS } from "@/data/domainIcons";
 import type {
@@ -16,6 +16,94 @@ interface RearapcaVocabularyPanelProps {
   selectedSlugs: Set<string>;
   progressBySlug: Record<string, number>;
   onToggleCourse: (slug: string) => void;
+  onResetCourseProgress: (
+    slug: string,
+  ) => Promise<{ ok: true } | { ok: false; error: string }>;
+}
+
+interface ResetTarget {
+  slug: string;
+  titleAr: string;
+}
+
+function ResetProgressButton({
+  disabled,
+  onClick,
+}: {
+  disabled?: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      disabled={disabled}
+      onClick={onClick}
+      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-red-200 bg-red-50 text-red-500 transition-colors hover:bg-red-100 hover:text-red-600 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-transparent disabled:text-slate-300 disabled:opacity-100"
+      aria-label="Ders ilerlemesini sıfırla"
+    >
+      <RotateCcw className="h-3.5 w-3.5" strokeWidth={2.2} />
+    </button>
+  );
+}
+
+function ResetProgressConfirmDialog({
+  target,
+  resetting,
+  error,
+  onCancel,
+  onConfirm,
+}: {
+  target: ResetTarget;
+  resetting: boolean;
+  error: string | null;
+  onCancel: () => void;
+  onConfirm: () => void;
+}) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 px-4">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="reset-progress-title"
+        className="w-full max-w-sm rounded-2xl bg-white p-5 shadow-xl"
+      >
+        <h2 id="reset-progress-title" className="text-lg font-bold text-slate-900">
+          İlerlemeyi sıfırla
+        </h2>
+        <p className="mt-3 text-sm leading-relaxed text-slate-600">
+          <span dir="rtl" className="font-arabic font-semibold text-slate-900">
+            {target.titleAr}
+          </span>{" "}
+          dersindeki tüm kelime ilerlemesi silinecek. Öğrenilen, tekrar edilen ve
+          ezberlenen kelimeler yeniden baştan sayılacak.
+        </p>
+        <p className="mt-2 text-sm font-medium text-slate-700">
+          Bu işlem geri alınamaz. Devam etmek istiyor musunuz?
+        </p>
+        {error && (
+          <p className="mt-3 text-sm font-medium text-red-500">{error}</p>
+        )}
+        <div className="mt-5 flex gap-2">
+          <button
+            type="button"
+            onClick={onCancel}
+            disabled={resetting}
+            className="flex-1 rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 disabled:opacity-50"
+          >
+            İptal
+          </button>
+          <button
+            type="button"
+            onClick={onConfirm}
+            disabled={resetting}
+            className="flex-1 rounded-xl bg-red-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-red-600 disabled:opacity-50"
+          >
+            {resetting ? "Sıfırlanıyor…" : "Sıfırla"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 const DOMAIN_FILTER_OPTIONS: { value: RearapcaDomainFilter; label: string }[] = [
@@ -54,6 +142,7 @@ function CourseSearchBox({
   selectedSlugs,
   progressBySlug,
   onToggleCourse,
+  onRequestReset,
 }: {
   items: RearapcaCourseItem[];
   query: string;
@@ -61,6 +150,7 @@ function CourseSearchBox({
   selectedSlugs: Set<string>;
   progressBySlug: Record<string, number>;
   onToggleCourse: (slug: string) => void;
+  onRequestReset: (target: ResetTarget) => void;
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [focused, setFocused] = useState(false);
@@ -129,7 +219,13 @@ function CourseSearchBox({
 
               return (
                 <li key={course.id}>
-                  <div className="flex items-center gap-3 px-3 py-2.5">
+                  <div className="flex items-center gap-2 px-3 py-2.5">
+                    <ResetProgressButton
+                      disabled={!selectable || percent === 0}
+                      onClick={() =>
+                        onRequestReset({ slug: course.slug, titleAr: course.titleAr })
+                      }
+                    />
                     <span
                       className={`w-10 shrink-0 text-right text-xs font-bold tabular-nums ${
                         percent > 0 ? "text-emerald-600" : "text-slate-400"
@@ -267,6 +363,7 @@ function CourseRow({
   percent,
   onSelect,
   onToggleSelected,
+  onRequestReset,
 }: {
   item: RearapcaCourseItem;
   active: boolean;
@@ -274,18 +371,25 @@ function CourseRow({
   percent: number;
   onSelect: (slug: string) => void;
   onToggleSelected: (slug: string) => void;
+  onRequestReset: (target: ResetTarget) => void;
 }) {
   const { course, summary } = item;
   const selectable = summary.hasVocabulary;
 
   return (
     <div
-      className={`flex w-full items-center gap-3 border-b border-slate-100 py-3 pl-8 pr-5 ${
+      className={`flex w-full items-center gap-2 border-b border-slate-100 py-3 pl-6 pr-5 ${
         active ? "bg-primary/10" : ""
       }`}
     >
+      <ResetProgressButton
+        disabled={!selectable || percent === 0}
+        onClick={() =>
+          onRequestReset({ slug: course.slug, titleAr: course.titleAr })
+        }
+      />
       <span
-        className={`w-11 shrink-0 text-right text-xs font-bold tabular-nums ${
+        className={`w-10 shrink-0 text-right text-xs font-bold tabular-nums ${
           percent > 0 ? "text-emerald-600" : "text-slate-400"
         }`}
       >
@@ -347,6 +451,7 @@ function DomainBlock({
   onToggle,
   onSelect,
   onToggleSelected,
+  onRequestReset,
 }: {
   group: RearapcaDomainGroup;
   activeSlug: string;
@@ -356,6 +461,7 @@ function DomainBlock({
   onToggle: () => void;
   onSelect: (slug: string) => void;
   onToggleSelected: (slug: string) => void;
+  onRequestReset: (target: ResetTarget) => void;
 }) {
   const domain = DOMAIN_META[group.domainId];
   const DomainIcon = DOMAIN_ICONS[group.domainId];
@@ -403,6 +509,7 @@ function DomainBlock({
             percent={progressBySlug[item.course.slug] ?? 0}
             onSelect={onSelect}
             onToggleSelected={onToggleSelected}
+            onRequestReset={onRequestReset}
           />
         ))}
     </div>
@@ -415,12 +522,16 @@ export default function RearapcaVocabularyPanel({
   selectedSlugs,
   progressBySlug,
   onToggleCourse,
+  onResetCourseProgress,
 }: RearapcaVocabularyPanelProps) {
   const [activeSlug, setActiveSlug] = useState("");
   const [readyOnly, setReadyOnly] = useState(false);
   const [domainFilter, setDomainFilter] = useState<RearapcaDomainFilter>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [openDomains, setOpenDomains] = useState<Set<string>>(new Set());
+  const [resetTarget, setResetTarget] = useState<ResetTarget | null>(null);
+  const [resetting, setResetting] = useState(false);
+  const [resetError, setResetError] = useState<string | null>(null);
 
   const filterItem = useCallback(
     (item: RearapcaCourseItem) => !readyOnly || item.summary.hasVocabulary,
@@ -481,8 +592,45 @@ export default function RearapcaVocabularyPanel({
     .flatMap((group) => group.items)
     .find((item) => item.course.slug === activeSlug);
 
+  const handleRequestReset = useCallback((target: ResetTarget) => {
+    setResetError(null);
+    setResetTarget(target);
+  }, []);
+
+  const handleCancelReset = useCallback(() => {
+    if (resetting) return;
+    setResetTarget(null);
+    setResetError(null);
+  }, [resetting]);
+
+  const handleConfirmReset = useCallback(async () => {
+    if (!resetTarget || resetting) return;
+
+    setResetting(true);
+    setResetError(null);
+
+    const result = await onResetCourseProgress(resetTarget.slug);
+    setResetting(false);
+
+    if (result.ok) {
+      setResetTarget(null);
+      return;
+    }
+
+    setResetError(result.error);
+  }, [onResetCourseProgress, resetTarget, resetting]);
+
   return (
     <div className="space-y-4">
+      {resetTarget && (
+        <ResetProgressConfirmDialog
+          target={resetTarget}
+          resetting={resetting}
+          error={resetError}
+          onCancel={handleCancelReset}
+          onConfirm={() => void handleConfirmReset()}
+        />
+      )}
       <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
         <div className="border-b border-slate-100 px-5 py-3">
           <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
@@ -499,6 +647,7 @@ export default function RearapcaVocabularyPanel({
           selectedSlugs={selectedSlugs}
           progressBySlug={progressBySlug}
           onToggleCourse={onToggleCourse}
+          onRequestReset={handleRequestReset}
         />
 
         <div className="flex items-center gap-3 border-b border-t border-slate-100 px-5 py-3.5">
@@ -538,6 +687,7 @@ export default function RearapcaVocabularyPanel({
                 onToggle={() => toggleDomain(key)}
                 onSelect={setActiveSlug}
                 onToggleSelected={onToggleCourse}
+                onRequestReset={handleRequestReset}
               />
             );
           })}

@@ -82,6 +82,8 @@ export async function POST(request: NextRequest) {
     .select("*")
     .eq("user_id", user.id)
     .eq("type", "vocab")
+    .eq("metadata->>source", "rearapca")
+    .eq("metadata->>wordId", body.wordId)
     .order("created_at", { ascending: true })
     .limit(5000);
 

@@ -10,8 +10,12 @@ import {
   MoreHorizontal,
   RotateCcw,
 } from "lucide-react";
+import { SpeakButton } from "@/components/course/VocabularySpeak";
 import { requeueWord } from "@/lib/rearapca-srs.mjs";
-import { buildMultipleChoiceOptions } from "@/lib/rearapca-learn";
+import {
+  buildMultipleChoiceOptions,
+  isTurkishAnswerCorrect,
+} from "@/lib/rearapca-learn";
 
 export type LearnMode = "new" | "review" | "mixed";
 
@@ -186,7 +190,6 @@ export default function LearnNewWordsScreen({
   const [error, setError] = useState<string | null>(null);
   const [cardStep, setCardStep] = useState<CardStep>("choose");
   const [answer, setAnswer] = useState("");
-  const [submitting, setSubmitting] = useState(false);
   const [dayStats, setDayStats] = useState<SessionStats>(
     initialStats ?? EMPTY_STATS,
   );
@@ -202,6 +205,7 @@ export default function LearnNewWordsScreen({
   const [isExiting, setIsExiting] = useState(false);
   const dragStartXRef = useRef(0);
   const activePointerRef = useRef<number | null>(null);
+  const processingWordIdsRef = useRef<Set<string>>(new Set());
 
   const current = queue[0] ?? null;
   const hintTarget = current ? getHintTarget(current.answerText) : "";
@@ -272,7 +276,7 @@ export default function LearnNewWordsScreen({
     setDragX(0);
     setDragging(false);
     setIsExiting(false);
-  }, [current?.id, current?.sessionKind, pendingLearningIds]);
+  }, [current, pendingLearningIds]);
 
   const revealNextHintLetter = useCallback(() => {
     if (!hintTarget) return;
@@ -359,34 +363,127 @@ export default function LearnNewWordsScreen({
     [onStatsChange],
   );
 
+  const rollbackDayStats = useCallback(
+    (kind: "learned" | "reviewed") => {
+      setDayStats((prev) => {
+        const next =
+          kind === "learned"
+            ? { ...prev, learnedToday: Math.max(0, prev.learnedToday - 1) }
+            : { ...prev, reviewedToday: Math.max(0, prev.reviewedToday - 1) };
+        onStatsChange?.(next);
+        return next;
+      });
+      if (kind === "reviewed") {
+        setReviewedThisSession((count) => Math.max(0, count - 1));
+      }
+    },
+    [onStatsChange],
+  );
+
+  const restoreOptimisticRemoval = useCallback(
+    (word: SessionWord, wasPendingLearning: boolean) => {
+      setQueue((items) =>
+        items.some((item) => item.id === word.id) ? items : [word, ...items],
+      );
+      setHistory((items) => items.filter((item) => item.id !== word.id));
+      setPendingLearningIds((ids) => {
+        const next = new Set(ids);
+        if (wasPendingLearning) next.add(word.id);
+        return next;
+      });
+    },
+    [],
+  );
+
+  const optimisticResultFor = useCallback(
+    (
+      action: "answer" | "know" | "unknown" | "already_known",
+      word: SessionWord,
+      value: string,
+    ): { correct: boolean; statKind: "learned" | "reviewed" | null } => {
+      const correct =
+        action === "unknown"
+          ? false
+          : action === "answer"
+            ? isTurkishAnswerCorrect(value, word.answerText)
+            : true;
+
+      if (!correct || action === "already_known") {
+        return { correct, statKind: null };
+      }
+
+      return {
+        correct: true,
+        statKind: word.sessionKind === "review" ? "reviewed" : "learned",
+      };
+    },
+    [],
+  );
+
   const submitAction = useCallback(
     async (
       action: "answer" | "know" | "unknown" | "already_known",
       word: SessionWord,
       value = "",
     ) => {
-      setSubmitting(true);
+      if (processingWordIdsRef.current.has(word.id)) return;
+      processingWordIdsRef.current.add(word.id);
+
       setError(null);
+      const wasPendingLearning = pendingLearningIds.has(word.id);
+      const optimistic = optimisticResultFor(action, word, value);
 
-      const response = await fetch("/api/rearapca/review", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          wordId: word.id,
-          action,
-          answer: value,
-        }),
-      });
+      if (optimistic.correct) {
+        removeCurrent(word);
+        if (optimistic.statKind) {
+          bumpDayStats(optimistic.statKind);
+          if (optimistic.statKind === "reviewed") {
+            setReviewedThisSession((count) => count + 1);
+          }
+        }
+      } else {
+        requeueCurrent(word);
+      }
 
-      const payload = (await response.json()) as ReviewResponse;
-      setSubmitting(false);
+      let payload: ReviewResponse | null = null;
 
-      if (!response.ok) {
-        setError(payload.error ?? "İlerleme kaydedilemedi.");
+      try {
+        const response = await fetch("/api/rearapca/review", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            wordId: word.id,
+            action,
+            answer: value,
+          }),
+        });
+
+        payload = (await response.json()) as ReviewResponse;
+
+        if (!response.ok) {
+          if (optimistic.correct) {
+            restoreOptimisticRemoval(word, wasPendingLearning);
+            if (optimistic.statKind) rollbackDayStats(optimistic.statKind);
+          }
+          setError(payload.error ?? "İlerleme kaydedilemedi.");
+          return;
+        }
+      } catch {
+        if (optimistic.correct) {
+          restoreOptimisticRemoval(word, wasPendingLearning);
+          if (optimistic.statKind) rollbackDayStats(optimistic.statKind);
+        }
+        setError("İlerleme kaydedilemedi. Bağlantıyı kontrol edip tekrar deneyin.");
+        return;
+      } finally {
+        processingWordIdsRef.current.delete(word.id);
+      }
+
+      if (!payload) {
         return;
       }
 
-      if (payload.correct) {
+      if (payload.correct && !optimistic.correct) {
         removeCurrent(word);
         if (payload.skipped) {
           return;
@@ -400,14 +497,26 @@ export default function LearnNewWordsScreen({
         return;
       }
 
-      requeueCurrent(word);
+      if (!payload.correct && optimistic.correct) {
+        restoreOptimisticRemoval(word, wasPendingLearning);
+        if (optimistic.statKind) rollbackDayStats(optimistic.statKind);
+        requeueCurrent(word);
+      }
     },
-    [removeCurrent, requeueCurrent, bumpDayStats],
+    [
+      bumpDayStats,
+      optimisticResultFor,
+      pendingLearningIds,
+      removeCurrent,
+      requeueCurrent,
+      restoreOptimisticRemoval,
+      rollbackDayStats,
+    ],
   );
 
   const getSwipeOutcome = useCallback(
     (direction: "left" | "right") => {
-      if (!current || submitting || isExiting) return null;
+      if (!current || isExiting) return null;
 
       if (current.sessionKind === "review") {
         return {
@@ -431,7 +540,7 @@ export default function LearnNewWordsScreen({
 
       return null;
     },
-    [cardStep, current, isInLearningPhase, isExiting, submitting],
+    [cardStep, current, isInLearningPhase, isExiting],
   );
 
   const executeSwipeOutcome = useCallback(
@@ -472,7 +581,7 @@ export default function LearnNewWordsScreen({
 
   const handleCardPointerDown = useCallback(
     (event: React.PointerEvent<HTMLDivElement>) => {
-      if (submitting || isExiting) return;
+      if (isExiting) return;
       if ((event.target as HTMLElement).closest("input, button, a, textarea")) {
         return;
       }
@@ -481,7 +590,7 @@ export default function LearnNewWordsScreen({
       setDragging(true);
       event.currentTarget.setPointerCapture(event.pointerId);
     },
-    [isExiting, submitting],
+    [isExiting],
   );
 
   const handleCardPointerMove = useCallback(
@@ -691,14 +800,38 @@ export default function LearnNewWordsScreen({
               <p className="line-clamp-2 text-sm font-medium text-slate-400">
                 {current.lessonTitleTr}
               </p>
-              <h2
-                dir={current.frontDir}
-                className={`mt-3 text-3xl font-bold leading-snug text-slate-900 ${
-                  current.frontDir === "rtl" ? "text-right font-arabic" : ""
+              <div
+                className={`mt-3 flex items-start gap-3 ${
+                  current.frontDir === "rtl" ? "justify-end" : ""
                 }`}
               >
-                {current.front}
-              </h2>
+                {current.frontDir === "rtl" && (
+                  <div className="pointer-events-auto shrink-0 pt-1">
+                    <SpeakButton
+                      text={current.front}
+                      frontDir={current.frontDir}
+                      stopPropagation
+                    />
+                  </div>
+                )}
+                <h2
+                  dir={current.frontDir}
+                  className={`min-w-0 text-3xl font-bold leading-snug text-slate-900 ${
+                    current.frontDir === "rtl" ? "text-right font-arabic" : ""
+                  }`}
+                >
+                  {current.front}
+                </h2>
+                {current.frontDir === "ltr" && (
+                  <div className="pointer-events-auto shrink-0 pt-1">
+                    <SpeakButton
+                      text={current.front}
+                      frontDir={current.frontDir}
+                      stopPropagation
+                    />
+                  </div>
+                )}
+              </div>
 
               {cardStep === "intake" && current.sessionKind === "new" && (
                 <div className="mt-14 flex flex-col items-center">
@@ -796,7 +929,7 @@ export default function LearnNewWordsScreen({
                       onClick={() =>
                         void submitAction("answer", current, option)
                       }
-                      disabled={submitting || isExiting}
+                      disabled={isExiting}
                       className="block w-full rounded-xl bg-slate-100 px-4 py-3 text-left font-semibold text-slate-700 transition-colors hover:bg-primary-light hover:text-primary disabled:opacity-60"
                     >
                       {option}
@@ -826,7 +959,7 @@ export default function LearnNewWordsScreen({
                       current,
                     )
                   }
-                  disabled={submitting || isExiting}
+                  disabled={isExiting}
                   className="rounded-xl py-2 text-slate-700 transition-colors hover:text-primary disabled:opacity-60"
                 >
                   {isInLearningPhase ? "Öğrendim" : "Önceden biliyordum"}
@@ -835,7 +968,7 @@ export default function LearnNewWordsScreen({
                   <button
                     type="button"
                     onClick={() => void submitAction("unknown", current)}
-                    disabled={submitting || isExiting}
+                    disabled={isExiting}
                     className="rounded-xl bg-red-50 px-3 py-2 font-bold text-red-600 transition-colors hover:bg-red-100 disabled:opacity-60"
                   >
                     Bilmiyorum · Tekrar göster
@@ -844,7 +977,7 @@ export default function LearnNewWordsScreen({
                   <button
                     type="button"
                     onClick={() => deferLearning(current)}
-                    disabled={submitting || isExiting}
+                    disabled={isExiting}
                     className="rounded-xl py-2 text-slate-700 transition-colors hover:text-primary disabled:opacity-60"
                   >
                     Bu kelimeyi öğrenmeye başla
@@ -856,7 +989,7 @@ export default function LearnNewWordsScreen({
                 <button
                   type="button"
                   onClick={() => void submitAction("know", current)}
-                  disabled={submitting || isExiting}
+                  disabled={isExiting}
                   className="rounded-xl py-2 text-slate-700 transition-colors hover:text-primary disabled:opacity-60"
                 >
                   Bildim
@@ -864,7 +997,7 @@ export default function LearnNewWordsScreen({
                 <button
                   type="button"
                   onClick={() => void submitAction("unknown", current)}
-                  disabled={submitting || isExiting}
+                  disabled={isExiting}
                   className="rounded-xl bg-red-50 px-3 py-2 font-bold text-red-600 transition-colors hover:bg-red-100 disabled:opacity-60"
                 >
                   Bilemedim
@@ -877,7 +1010,6 @@ export default function LearnNewWordsScreen({
             <button
               type="button"
               onClick={() => void submitAction("answer", current, answer)}
-              disabled={submitting}
               className="w-full rounded-xl bg-primary px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-dark disabled:opacity-60"
             >
               Cevabı kontrol et

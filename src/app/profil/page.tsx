@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import Breadcrumb from "@/components/layout/Breadcrumb";
 import SupabaseNotice from "@/components/auth/SupabaseNotice";
+import RearapcaAnalyticsPanel from "@/components/rearapca/RearapcaAnalyticsPanel";
 import { signOut } from "@/app/auth/actions";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
@@ -12,27 +13,17 @@ import type {
   Profile,
   StudyProgress,
 } from "@/lib/supabase/types";
+import {
+  aggregateStudyTimeTotalsByModuleLabel,
+  formatStudyDuration,
+} from "@/lib/study-time";
 
 export const metadata: Metadata = { title: "Profilim" };
 
 function courseTitle(slug: string | null): string {
   if (!slug) return "—";
+  if (slug === "rearapca") return "Rearapça";
   return getCourseBySlug(slug)?.titleAr ?? slug;
-}
-
-const TYPE_LABEL: Record<string, string> = {
-  vocab: "Kelime Çalışması",
-  mindmap: "Zihin Şeması",
-  visit: "Ziyaret",
-};
-
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleString("tr-TR", {
-    day: "2-digit",
-    month: "short",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 }
 
 export default async function ProfilPage() {
@@ -51,23 +42,28 @@ export default async function ProfilPage() {
 
   if (!user) redirect("/giris");
 
-  const [{ data: profileData }, { data: events }, { data: progress }] =
+  const [{ data: profileData }, { data: progress }, { data: timeEvents }] =
     await Promise.all([
       supabase.from("profiles").select("*").eq("id", user.id).single(),
-      supabase
-        .from("activity_events")
-        .select("*")
-        .order("created_at", { ascending: false })
-        .limit(25),
       supabase
         .from("study_progress")
         .select("*")
         .order("updated_at", { ascending: false }),
+      supabase
+        .from("activity_events")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false })
+        .limit(5000),
     ]);
 
   const profile = profileData as Profile | null;
-  const activityEvents = (events ?? []) as ActivityEvent[];
+  const activityEvents = (timeEvents ?? []) as ActivityEvent[];
   const studyProgress = (progress ?? []) as StudyProgress[];
+  const moduleStudyTimes = aggregateStudyTimeTotalsByModuleLabel(
+    activityEvents,
+    courseTitle,
+  );
 
   const isTeacher = profile?.role === "teacher";
 
@@ -120,6 +116,10 @@ export default async function ProfilPage() {
             </form>
           </div>
         </div>
+
+        <section className="mb-6">
+          <RearapcaAnalyticsPanel />
+        </section>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {/* Kelime skorları */}
@@ -183,33 +183,27 @@ export default async function ProfilPage() {
           </section>
         </div>
 
-        {/* Son aktivite */}
         <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-lg font-bold text-primary">Son Aktivite</h2>
-          {activityEvents.length === 0 ? (
-            <p className="text-sm text-surface-muted">Henüz aktivite yok.</p>
+          <h2 className="mb-4 text-lg font-bold text-primary">
+            Modül Çalışma Süreleri
+          </h2>
+          {moduleStudyTimes.length === 0 ? (
+            <p className="text-sm text-surface-muted">
+              Henüz kayıtlı çalışma süresi yok. Rearapça, anahtar kelimeler veya
+              zihin şeması bölümlerinde çalışmaya başlayın.
+            </p>
           ) : (
             <ul className="divide-y divide-slate-100">
-              {activityEvents.slice(0, 15).map((e) => (
+              {moduleStudyTimes.map((entry) => (
                 <li
-                  key={e.id}
-                  className="flex items-center justify-between gap-3 py-2.5 text-sm"
+                  key={entry.moduleLabel}
+                  className="flex items-center justify-between gap-4 py-3 text-sm"
                 >
-                  <span className="flex items-center gap-2">
-                    <span className="rounded-md bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
-                      {TYPE_LABEL[e.type] ?? e.type}
-                    </span>
-                    <span className="truncate text-slate-700">
-                      {courseTitle(e.course_slug)}
-                    </span>
-                  </span>
-                  <span className="flex shrink-0 items-center gap-3 text-surface-muted">
-                    {typeof e.score === "number" && (
-                      <span className="font-semibold text-emerald-600">
-                        {e.score}
-                      </span>
-                    )}
-                    <span>{formatDate(e.created_at)}</span>
+                  <p className="font-semibold text-slate-800">
+                    {entry.moduleLabel}
+                  </p>
+                  <span className="shrink-0 rounded-lg bg-primary-light px-3 py-1.5 text-sm font-bold text-primary">
+                    {formatStudyDuration(entry.totalSeconds)}
                   </span>
                 </li>
               ))}

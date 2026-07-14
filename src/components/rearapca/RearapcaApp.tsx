@@ -12,6 +12,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import LearnNewWordsScreen from "@/components/rearapca/LearnNewWordsScreen";
+import BrowseFlashcardsScreen from "@/components/rearapca/BrowseFlashcardsScreen";
 import RearapcaAnalyticsPanel from "@/components/rearapca/RearapcaAnalyticsPanel";
 import RearapcaVocabularyPanel from "@/components/rearapca/RearapcaVocabularyPanel";
 import type { RearapcaDomainGroup } from "@/lib/rearapca-types";
@@ -25,11 +26,12 @@ import {
   readSelectedCourseSlugs,
   writeSelectedCourseSlugs,
 } from "@/lib/rearapca-course-selection";
+import { useStudyTimeTracker } from "@/hooks/useStudyTimeTracker";
 
 type Tab = "learn" | "vocabulary" | "menu";
-type LearnView = "home" | "new-words" | "review-words" | "mixed-words";
+type LearnView = "home" | "new-words" | "review-words" | "mixed-words" | "browse-flashcards";
 
-const WEEK_DAYS = ["S", "M", "T", "W", "T", "F", "S"] as const;
+const WEEK_DAYS = ["Pz", "Pt", "Sa", "Ça", "Pe", "Cu", "Ct"] as const;
 
 interface LearnStats {
   learnedToday: number;
@@ -57,9 +59,9 @@ interface RearapcaAppProps {
 
 function TabBar({ active, onChange }: { active: Tab; onChange: (tab: Tab) => void }) {
   const tabs: { id: Tab; label: string; badge?: boolean }[] = [
-    { id: "learn", label: "Learn" },
-    { id: "vocabulary", label: "Vocabulary" },
-    { id: "menu", label: "Menu", badge: true },
+    { id: "learn", label: "Öğren" },
+    { id: "vocabulary", label: "Kelime Arşivi" },
+    { id: "menu", label: "Menü", badge: true },
   ];
 
   return (
@@ -174,6 +176,7 @@ function LearnHome({
   onLearnNewWords,
   onReviewWords,
   onMixedMode,
+  onBrowseFlashcards,
   onDailyGoalChange,
 }: {
   readyCount: number;
@@ -184,6 +187,7 @@ function LearnHome({
   onLearnNewWords: () => void;
   onReviewWords: () => void;
   onMixedMode: () => void;
+  onBrowseFlashcards: () => void;
   onDailyGoalChange: (goal: number) => void;
 }) {
   const todayIndex = new Date().getDay();
@@ -202,7 +206,7 @@ function LearnHome({
 
   return (
     <div className="space-y-6">
-      <SectionLabel>Spaced repetition</SectionLabel>
+      <SectionLabel>Aralıklı tekrar</SectionLabel>
       <ListCard>
         <ListRow
           icon={
@@ -211,7 +215,7 @@ function LearnHome({
             </span>
           }
           title={`${selectedCount > 0 ? selectedCount : readyCount} ders seçili`}
-          subtitle="Vocabulary sekmesinden ders seçin"
+          subtitle="Kelime arşivi sekmesinden ders seçin"
           onClick={onOpenVocabulary}
         />
         <ListRow
@@ -220,8 +224,8 @@ function LearnHome({
               <Plus className="h-6 w-6" strokeWidth={2.4} />
             </span>
           }
-          title="Learn new words"
-          subtitle={`Learned today: ${stats.learnedToday} of ${dailyGoal}`}
+          title="Yeni kelime öğren"
+          subtitle={`Bugün öğrenilen: ${stats.learnedToday} / ${dailyGoal}`}
           onClick={onLearnNewWords}
         />
         <ListRow
@@ -230,8 +234,8 @@ function LearnHome({
               <Clock3 className="h-5 w-5" strokeWidth={2.2} />
             </span>
           }
-          title="Review words"
-          subtitle={`Words to review: ${stats.dueCount}`}
+          title="Kelimeleri tekrar et"
+          subtitle={`Tekrar bekleyen: ${stats.dueCount} kelime`}
           onClick={onReviewWords}
         />
         <ListRow
@@ -240,13 +244,13 @@ function LearnHome({
               <Lightbulb className="h-5 w-5" strokeWidth={2.2} />
             </span>
           }
-          title="Mixed mode"
-          subtitle="Review due words first, then new words"
+          title="Karışık mod"
+          subtitle="Önce tekrarlar, sonra yeni kelimeler"
           onClick={onMixedMode}
         />
       </ListCard>
 
-      <SectionLabel>Extra modes (do not affect stats)</SectionLabel>
+      <SectionLabel>Ek modlar (istatistiği etkilemez)</SectionLabel>
       <ListCard>
         <ListRow
           icon={
@@ -254,8 +258,8 @@ function LearnHome({
               <RefreshCw className="h-5 w-5" strokeWidth={2.2} />
             </span>
           }
-          title="Browse flashcards"
-          onClick={onOpenVocabulary}
+          title="Kartları gözat"
+          onClick={onBrowseFlashcards}
         />
         <ListRow
           icon={
@@ -263,11 +267,11 @@ function LearnHome({
               <Car className="h-5 w-5" strokeWidth={2.2} />
             </span>
           }
-          title="Hands-free mode"
+          title="Eller serbest mod"
         />
       </ListCard>
 
-      <SectionLabel>Stats</SectionLabel>
+      <SectionLabel>İstatistikler</SectionLabel>
       <ListCard>
         <div className="border-b border-slate-100 px-5 py-5">
           <div className="flex justify-between">
@@ -294,13 +298,13 @@ function LearnHome({
 
           <div className="mt-5 grid grid-cols-2 gap-3">
             <div className="rounded-xl bg-slate-50 px-4 py-3">
-              <p className="text-sm font-semibold text-slate-900">Current streak</p>
-              <p className="mt-1 text-sm text-slate-500">0 days</p>
+              <p className="text-sm font-semibold text-slate-900">Güncel seri</p>
+              <p className="mt-1 text-sm text-slate-500">0 gün</p>
             </div>
             <div className="rounded-xl bg-slate-50 px-4 py-3">
-              <p className="text-sm font-semibold text-slate-900">Best streak</p>
+              <p className="text-sm font-semibold text-slate-900">En iyi seri</p>
               <p className="mt-1 text-sm text-slate-500">
-                {stats.masteredCount} mastered words
+                {stats.masteredCount} ezberlenen kelime
               </p>
             </div>
           </div>
@@ -318,7 +322,6 @@ function LearnHome({
                 <input
                   type="number"
                   min={1}
-                  max={100}
                   value={goalDraft}
                   onChange={(event) => setGoalDraft(event.target.value)}
                   onKeyDown={(event) => {
@@ -352,7 +355,7 @@ function LearnHome({
                 </button>
               </p>
             )}
-            <p className="mt-1 text-xs text-slate-500">Günlük hedef (1–100 kelime)</p>
+            <p className="mt-1 text-xs text-slate-500">Günlük kelime hedefi</p>
           </div>
         </div>
       </ListCard>
@@ -389,6 +392,12 @@ export default function RearapcaApp({
   domainGroups,
   readyCount,
 }: RearapcaAppProps) {
+  useStudyTimeTracker({
+    courseSlug: "rearapca",
+    module: "rearapca",
+    moduleLabel: "Rearapça",
+  });
+
   const [tab, setTab] = useState<Tab>("learn");
   const [learnView, setLearnView] = useState<LearnView>("home");
   const [dailyGoal, setDailyGoal] = useState(DEFAULT_REARAPCA_DAILY_GOAL);
@@ -482,6 +491,51 @@ export default function RearapcaApp({
       return next;
     });
   }, []);
+
+  const handleResetCourseProgress = useCallback(
+    async (courseSlug: string) => {
+      try {
+        const response = await fetch(
+          `/api/rearapca/course-progress?courseSlug=${encodeURIComponent(courseSlug)}`,
+          { method: "DELETE" },
+        );
+        const payload = (await response.json()) as { error?: string };
+        if (!response.ok) {
+          return {
+            ok: false as const,
+            error: payload.error ?? "İlerleme sıfırlanamadı.",
+          };
+        }
+
+        await refreshCourseProgress();
+
+        const statsResponse = await fetch("/api/rearapca/session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            mode: "mixed",
+            dailyGoal,
+            courseSlugs: selectedCourseList,
+            ...localDayBounds(),
+          }),
+        });
+        if (statsResponse.ok) {
+          const statsPayload = (await statsResponse.json()) as {
+            stats?: LearnStats;
+          };
+          if (statsPayload.stats) setStats(statsPayload.stats);
+        }
+
+        return { ok: true as const };
+      } catch {
+        return {
+          ok: false as const,
+          error: "İlerleme sıfırlanamadı. Bağlantınızı kontrol edin.",
+        };
+      }
+    },
+    [dailyGoal, refreshCourseProgress, selectedCourseList],
+  );
 
   useEffect(() => {
     let alive = true;
@@ -598,6 +652,16 @@ export default function RearapcaApp({
       );
     }
 
+    if (tab === "learn" && learnView === "browse-flashcards") {
+      return (
+        <BrowseFlashcardsScreen
+          domainGroups={domainGroups}
+          initialSelectedSlugs={selectedCourseList}
+          onBack={() => setLearnView("home")}
+        />
+      );
+    }
+
     switch (tab) {
       case "learn":
         return (
@@ -610,6 +674,7 @@ export default function RearapcaApp({
             onLearnNewWords={() => startLearnView("new-words")}
             onReviewWords={() => startLearnView("review-words")}
             onMixedMode={() => startLearnView("mixed-words")}
+            onBrowseFlashcards={() => setLearnView("browse-flashcards")}
             onDailyGoalChange={handleDailyGoalChange}
           />
         );
@@ -621,6 +686,7 @@ export default function RearapcaApp({
             selectedSlugs={selectedCourseSlugs}
             progressBySlug={courseProgress}
             onToggleCourse={handleToggleCourse}
+            onResetCourseProgress={handleResetCourseProgress}
           />
         );
       case "menu":
@@ -643,6 +709,7 @@ export default function RearapcaApp({
     handleDailyGoalChange,
     handleStatsChange,
     handleToggleCourse,
+    handleResetCourseProgress,
     startLearnView,
   ]);
 
@@ -668,7 +735,7 @@ export default function RearapcaApp({
 
         <div className={inLearnSession ? "" : "mt-8"}>{content}</div>
 
-        {!inLearnSession && (
+        {!inLearnSession && tab !== "vocabulary" && (
           <div className="mt-8">
             <RearapcaAnalyticsPanel />
           </div>

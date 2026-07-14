@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { VocabularySet, VocabularyUnit } from "@/lib/types";
 import { logActivity } from "@/lib/activity";
+import { useStudyTimeTracker } from "@/hooks/useStudyTimeTracker";
 import { FrontWord, SpeakButton } from "@/components/course/VocabularySpeak";
 
 /**
@@ -84,6 +85,12 @@ interface VocabularyTrainerProps {
 export default function VocabularyTrainer({ set }: VocabularyTrainerProps) {
   const [activeUnitId, setActiveUnitId] = useState<string | null>(null);
   const [mode, setMode] = useState<Mode>("kartlar");
+
+  useStudyTimeTracker({
+    courseSlug: set.contentSlug,
+    module: "vocab",
+    moduleLabel: "Anahtar Kelimeler",
+  });
 
   const frontDir = set.frontDir ?? "rtl";
   const activeUnit = set.units.find((unit) => unit.id === activeUnitId) ?? null;
