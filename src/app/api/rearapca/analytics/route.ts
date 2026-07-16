@@ -32,10 +32,30 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  const studentId = request.nextUrl.searchParams.get("studentId");
+  let targetUserId = user.id;
+
+  if (studentId && studentId !== user.id) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+
+    if ((profile as { role?: string } | null)?.role !== "teacher") {
+      return NextResponse.json(
+        { error: "Bu öğrencinin istatistiklerine erişim yetkiniz yok." },
+        { status: 403 },
+      );
+    }
+
+    targetUserId = studentId;
+  }
+
   const { data, error } = await supabase
     .from("activity_events")
     .select("*")
-    .eq("user_id", user.id)
+    .eq("user_id", targetUserId)
     .eq("type", "vocab")
     .order("created_at", { ascending: true })
     .limit(10000);

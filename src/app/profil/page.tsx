@@ -67,6 +67,10 @@ export default async function ProfilPage() {
 
   const isTeacher = profile?.role === "teacher";
 
+  if (isTeacher) {
+    redirect("/panel");
+  }
+
   // Kelime skorlarının ders+ünite bazında en yükseğini özetle.
   const bestVocab = new Map<string, { title: string; score: number }>();
   for (const e of activityEvents) {

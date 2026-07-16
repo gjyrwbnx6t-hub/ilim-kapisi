@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import Link from "next/link";
 import type { AuthActionState } from "@/app/auth/actions";
+import PasswordInput from "@/components/auth/PasswordInput";
 
 type AuthAction = (
   prev: AuthActionState,
@@ -12,25 +13,43 @@ type AuthAction = (
 interface AuthFormProps {
   mode: "signin" | "signup";
   action: AuthAction;
+  audience?: "student" | "teacher";
 }
 
-export default function AuthForm({ mode, action }: AuthFormProps) {
+export default function AuthForm({
+  mode,
+  action,
+  audience = "student",
+}: AuthFormProps) {
   const [state, formAction, pending] = useActionState<
     AuthActionState,
     FormData
   >(action, {});
 
   const isSignup = mode === "signup";
+  const isTeacher = audience === "teacher";
+  const title = isTeacher
+    ? isSignup
+      ? "Öğretmen Kaydı"
+      : "Öğretmen Girişi"
+    : isSignup
+      ? "Kayıt Ol"
+      : "Giriş Yap";
+  const description = isTeacher
+    ? isSignup
+      ? "Öğrenci izinleriyle çalışan bir öğretmen hesabı oluşturun."
+      : "Öğrenci verilerini takip etmek ve geri bildirim vermek için giriş yapın."
+    : isSignup
+      ? "Çalışma aktivitenizi kaydetmek için bir hesap oluşturun."
+      : "Hesabınıza giriş yaparak kaldığınız yerden devam edin.";
 
   return (
     <div className="mx-auto w-full max-w-md rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
       <h1 className="mb-1 text-2xl font-bold text-primary">
-        {isSignup ? "Kayıt Ol" : "Giriş Yap"}
+        {title}
       </h1>
       <p className="mb-6 text-sm text-surface-muted">
-        {isSignup
-          ? "Çalışma aktivitenizi kaydetmek için bir hesap oluşturun."
-          : "Hesabınıza giriş yaparak kaldığınız yerden devam edin."}
+        {description}
       </p>
 
       <form action={formAction} className="flex flex-col gap-4">
@@ -65,17 +84,28 @@ export default function AuthForm({ mode, action }: AuthFormProps) {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="password" className="text-sm font-medium text-slate-700">
-            Şifre
-          </label>
-          <input
+          <div className="flex items-center justify-between gap-3">
+            <label htmlFor="password" className="text-sm font-medium text-slate-700">
+              Şifre
+            </label>
+            {!isSignup && (
+              <Link
+                href={
+                  isTeacher
+                    ? "/sifremi-unuttum?audience=teacher"
+                    : "/sifremi-unuttum"
+                }
+                className="text-sm font-semibold text-primary hover:underline"
+              >
+                Şifremi unuttum
+              </Link>
+            )}
+          </div>
+          <PasswordInput
             id="password"
             name="password"
-            type="password"
-            required
             autoComplete={isSignup ? "new-password" : "current-password"}
             minLength={6}
-            className="rounded-lg border border-slate-300 px-4 py-2.5 outline-none focus:border-primary"
           />
         </div>
 
@@ -104,11 +134,39 @@ export default function AuthForm({ mode, action }: AuthFormProps) {
       </form>
 
       <div className="mt-6 text-center text-sm text-surface-muted">
-        {isSignup ? (
+        {isTeacher ? (
+          isSignup ? (
+            <>
+              Öğretmen hesabınız var mı?{" "}
+              <Link href="/ogretmen/giris" className="font-semibold text-primary hover:underline">
+                Öğretmen girişi
+              </Link>
+              <span className="mx-2 text-slate-300">·</span>
+              <Link href="/kayit" className="font-semibold text-primary hover:underline">
+                Öğrenci kaydı
+              </Link>
+            </>
+          ) : (
+            <>
+              Öğretmen hesabınız yok mu?{" "}
+              <Link href="/ogretmen/kayit" className="font-semibold text-primary hover:underline">
+                Öğretmen kaydı
+              </Link>
+              <span className="mx-2 text-slate-300">·</span>
+              <Link href="/giris" className="font-semibold text-primary hover:underline">
+                Öğrenci girişi
+              </Link>
+            </>
+          )
+        ) : isSignup ? (
           <>
             Zaten hesabınız var mı?{" "}
             <Link href="/giris" className="font-semibold text-primary hover:underline">
               Giriş yapın
+            </Link>
+            <span className="mx-2 text-slate-300">·</span>
+            <Link href="/ogretmen/kayit" className="font-semibold text-primary hover:underline">
+              Öğretmen kaydı
             </Link>
           </>
         ) : (
@@ -116,6 +174,10 @@ export default function AuthForm({ mode, action }: AuthFormProps) {
             Hesabınız yok mu?{" "}
             <Link href="/kayit" className="font-semibold text-primary hover:underline">
               Kayıt olun
+            </Link>
+            <span className="mx-2 text-slate-300">·</span>
+            <Link href="/ogretmen/giris" className="font-semibold text-primary hover:underline">
+              Öğretmen girişi
             </Link>
           </>
         )}

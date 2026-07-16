@@ -46,7 +46,11 @@ function bucketTotal(bucket: RearapcaAnalytics["buckets"][number]) {
   );
 }
 
-export default function RearapcaAnalyticsPanel() {
+export default function RearapcaAnalyticsPanel({
+  studentId,
+}: {
+  studentId?: string;
+} = {}) {
   const chartScrollRef = useRef<HTMLDivElement>(null);
   const [range, setRange] = useState<AnalyticsRange>("30");
   const [data, setData] = useState<RearapcaAnalytics>(() =>
@@ -60,7 +64,10 @@ export default function RearapcaAnalyticsPanel() {
     setLoading(true);
     setError(null);
 
-    void fetch(`/api/rearapca/analytics?range=${range}`)
+    const query = new URLSearchParams({ range });
+    if (studentId) query.set("studentId", studentId);
+
+    void fetch(`/api/rearapca/analytics?${query.toString()}`)
       .then(async (response) => {
         const payload = (await response.json()) as RearapcaAnalytics & {
           error?: string;
@@ -82,7 +89,7 @@ export default function RearapcaAnalyticsPanel() {
     return () => {
       alive = false;
     };
-  }, [range]);
+  }, [range, studentId]);
 
   useEffect(() => {
     if (loading) return;

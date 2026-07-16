@@ -6,9 +6,94 @@
   body {
     @apply bg-surface text-slate-700 antialiased;
   }
+
+  html.theme-dark body {
+    @apply bg-slate-950 text-slate-200;
+  }
 }
 
 @layer utilities {
+  html.theme-dark .bg-white {
+    background-color: rgb(15 23 42);
+  }
+
+  html.theme-dark .bg-surface {
+    background-color: rgb(2 6 23);
+  }
+
+  html.theme-dark .bg-slate-50 {
+    background-color: rgb(15 23 42);
+  }
+
+  html.theme-dark .bg-slate-100 {
+    background-color: rgb(30 41 59);
+  }
+
+  html.theme-dark .bg-amber-50,
+  html.theme-dark .bg-amber-50\/40 {
+    background-color: rgb(120 53 15 / 0.18);
+  }
+
+  html.theme-dark .bg-primary-light {
+    background-color: rgb(6 78 59 / 0.35);
+  }
+
+  html.theme-dark .bg-red-50 {
+    background-color: rgb(127 29 29 / 0.24);
+  }
+
+  html.theme-dark .bg-emerald-50 {
+    background-color: rgb(6 78 59 / 0.24);
+  }
+
+  html.theme-dark .text-slate-900,
+  html.theme-dark .text-slate-800 {
+    color: rgb(226 232 240);
+  }
+
+  html.theme-dark .text-slate-700,
+  html.theme-dark .text-slate-600,
+  html.theme-dark .text-surface-muted {
+    color: rgb(148 163 184);
+  }
+
+  html.theme-dark .text-primary,
+  html.theme-dark .text-primary-dark {
+    color: rgb(52 211 153);
+  }
+
+  html.theme-dark .text-amber-800 {
+    color: rgb(252 211 77);
+  }
+
+  html.theme-dark .text-amber-700 {
+    color: rgb(253 230 138);
+  }
+
+  html.theme-dark .border-slate-100,
+  html.theme-dark .border-slate-200,
+  html.theme-dark .border-slate-300 {
+    border-color: rgb(51 65 85);
+  }
+
+  html.theme-dark .divide-slate-100 > :not([hidden]) ~ :not([hidden]) {
+    border-color: rgb(51 65 85);
+  }
+
+  html.theme-dark .shadow-sm {
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.35);
+  }
+
+  html.theme-dark .hover\:bg-slate-50:hover {
+    background-color: rgb(30 41 59);
+  }
+
+  html.theme-dark input,
+  html.theme-dark textarea,
+  html.theme-dark select {
+    color-scheme: dark;
+  }
+
   /* Zihin şeması gezgini geçiş animasyonları (bağımlılıksız, hafif). */
   @keyframes mindmap-enter-forward {
     from {

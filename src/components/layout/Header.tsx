@@ -2,6 +2,7 @@ import Link from "next/link";
 import NavLinks from "@/components/layout/NavLinks";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
+import { isBootstrapTeacherEmail } from "@/lib/teacher-accounts";
 
 /**
  * Üst çubuk. Oturum durumunu sunucuda okur; giriş varsa "Profilim/Çıkış",
@@ -26,6 +27,17 @@ export default async function Header() {
         .eq("id", user.id)
         .single();
       isTeacher = (profile as { role?: string } | null)?.role === "teacher";
+
+      if (!isTeacher && isBootstrapTeacherEmail(user.email)) {
+        const { data: syncedProfile } = await supabase.rpc(
+          "sync_current_user_profile",
+        );
+        const syncedRow = Array.isArray(syncedProfile)
+          ? syncedProfile[0]
+          : syncedProfile;
+        isTeacher =
+          (syncedRow as { role?: string } | null)?.role === "teacher";
+      }
     }
   }
 
