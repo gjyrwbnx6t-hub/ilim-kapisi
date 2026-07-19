@@ -13,6 +13,7 @@ const baseLinks = [
   { href: "/departments/usul-al-din", labelKey: "din" },
   { href: "/rearapca", labelKey: "rearapca" },
   { href: "/kariyer", labelKey: "career" },
+  { href: "/rutin", labelKey: "routine" },
   { href: "/ayarlar", labelKey: "settings" },
 ] as const;
 
@@ -133,10 +134,10 @@ export default function NavLinks({ isAuthed, isTeacher }: NavLinksProps) {
     <>
       <nav
         dir={direction}
-        className={`hidden md:block ${navClassName}`}
+        className={`hidden lg:block ${navClassName}`}
         aria-label="Ana menü"
       >
-        <ul className="flex items-center gap-6">
+        <ul className="flex items-center gap-4 xl:gap-6">
           {renderLinks()}
           <li>{renderAuthAction()}</li>
         </ul>
@@ -144,7 +145,7 @@ export default function NavLinks({ isAuthed, isTeacher }: NavLinksProps) {
 
       <button
         type="button"
-        className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 text-white transition-colors hover:border-white/40 hover:bg-white/10 md:hidden"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 text-white transition-colors hover:border-white/40 hover:bg-white/10 lg:hidden"
         aria-label="Menüyü aç"
         aria-expanded={menuOpen}
         aria-controls="mobile-nav-drawer"
@@ -154,7 +155,7 @@ export default function NavLinks({ isAuthed, isTeacher }: NavLinksProps) {
       </button>
 
       <div
-        className={`fixed inset-0 z-50 md:hidden ${
+        className={`fixed inset-0 z-50 lg:hidden ${
           menuOpen ? "pointer-events-auto" : "pointer-events-none"
         }`}
         aria-hidden={!menuOpen}
